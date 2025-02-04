@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="938267a2-3fd0-4852-88cd-f37260d8236b" name="Changes" comment="finish first project" />
+    <list default="true" id="938267a2-3fd0-4852-88cd-f37260d8236b" name="Changes" comment="finish first project">
+      <change afterPath="$PROJECT_DIR$/../2_Mapping_Associations/src/main/java/iuh/fit/models/Guide.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../2_Mapping_Associations/src/main/java/iuh/fit/models/Student.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../2_Mapping_Associations/src/main/resources/META-INF/persistence.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,37 +25,38 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "HuynhDucPhu2502"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;HuynhDucPhu2502&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/HuynhDucPhu2502/Distributed-Programming-Learning.git",
-    "accountId": "ab46dd0e-6dbe-47dc-b9b2-94dd43b3edd1"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/HuynhDucPhu2502/Distributed-Programming-Learning.git&quot;,
+    &quot;accountId&quot;: &quot;ab46dd0e-6dbe-47dc-b9b2-94dd43b3edd1&quot;
   }
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 6
-}]]></component>
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
   <component name="ProjectId" id="2sYoaYcyeklu8szmztX4ZIdHTU8" />
   <component name="ProjectViewState">
     <option name="compactDirectories" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Main.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "com.codeium.enabled": "true",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/Projects/PhanTanJava/HuynhDucPhu_22653551_DHKTPM18ATT",
-    "onboarding.tips.debug.path": "D:/Projects/Distributed Programming Learning/1_Component_Mapping/src/main/java/iuh/fit/Main.java"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;com.codeium.enabled&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Projects/Distributed Programming Learning/1_Component_Mapping&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;D:/Projects/Distributed Programming Learning/1_Component_Mapping/src/main/java/iuh/fit/Main.java&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="iuh.fit.Main" />
