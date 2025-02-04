@@ -25,5 +25,6 @@ public class Student {
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     @JoinColumn(name = "guide_id")
+    @ToString.Exclude
     private Guide guide;
 }
