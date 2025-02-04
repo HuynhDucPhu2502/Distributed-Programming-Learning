@@ -19,8 +19,9 @@ public class Main {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("mariadb");
 
 //        generateFakeData(emf);
-        testPersistCascade(emf);
-        testDeleteCascade(emf);
+//        testPersistCascade(emf);
+//        testDeleteOneCascade(emf);
+        testDeleteManyCascade(emf);
     }
 
     public static void testPersistCascade(EntityManagerFactory entityManagerFactory) {
@@ -49,7 +50,9 @@ public class Main {
 
     }
 
-    public static void testDeleteCascade(EntityManagerFactory entityManagerFactory) {
+    public static void testDeleteOneCascade(EntityManagerFactory entityManagerFactory) {
+        testPersistCascade(entityManagerFactory);
+
         try (EntityManager em = entityManagerFactory.createEntityManager()) {
             em.getTransaction().begin();
 
@@ -66,6 +69,44 @@ public class Main {
             System.out.println("guide after remove Student Entity = " + guide);
 
             em.getTransaction().commit();
+        }
+    }
+
+    public static void testDeleteManyCascade(EntityManagerFactory entityManagerFactory) {
+        Faker faker = new Faker();
+
+        try (EntityManager em = entityManagerFactory.createEntityManager()) {
+            em.getTransaction().begin();
+
+            Guide guide = new Guide();
+            guide.setName(faker.name().fullName());
+            guide.setSalary(faker.number().randomDouble(2, 1000, 10000));
+            guide.setStaffId(faker.bothify("2025-###-???"));
+
+            IntStream.range(0, 2).forEach(x -> {
+                Student student = new Student();
+                student.setName(faker.name().fullName());
+                student.setEnrollmentId(faker.bothify("2025-???-###"));
+                student.setGuide(guide);
+
+                em.persist(student);
+            });
+
+            em.getTransaction().commit();
+
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+
+        try (EntityManager em = entityManagerFactory.createEntityManager()) {
+            em.getTransaction().begin();
+
+            Student student = em.find(Student.class, 1L);
+            em.remove(student);
+
+            em.getTransaction().commit();
+        } catch (Exception exception) {
+            System.out.println("Lỗi, không thể xóa được");
         }
     }
 
