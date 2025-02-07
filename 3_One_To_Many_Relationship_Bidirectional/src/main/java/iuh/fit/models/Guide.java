@@ -33,7 +33,11 @@ public class Guide {
     @Column(name = "staff_id")
     private String staffId;
 
-    @OneToMany(mappedBy = "guide", cascade = {CascadeType.PERSIST})
+    @OneToMany(
+            mappedBy = "guide",
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
+            orphanRemoval = true
+    )
     private Set<Student> students = new HashSet<>();
 
     public void addStudent(Student student) {

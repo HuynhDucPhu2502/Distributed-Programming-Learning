@@ -19,7 +19,9 @@ public class Main {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("mariadb");
 
 //        testGuidePersistCascade(emf);
-        testGuideUpdate(emf);
+//        testGuideUpdate(emf);
+//        testGuideRemove(emf);
+        testStudentOrphanRemoval(emf);
     }
 
     public static void testGuidePersistCascade(EntityManagerFactory entityManagerFactory) {
@@ -110,5 +112,117 @@ public class Main {
 
     }
 
+    public static void testGuideRemove(EntityManagerFactory entityManagerFactory) {
+        Faker faker = new Faker();
 
+        try (EntityManager em = entityManagerFactory.createEntityManager()) {
+            em.getTransaction().begin();
+
+            Guide guide = new Guide();
+            guide.setName(faker.name().fullName());
+            guide.setSalary(faker.number().randomDouble(2, 1000, 10000));
+            guide.setStaffId(faker.bothify("2025-###-???"));
+
+            Student firstStudent = new Student();
+            firstStudent.setName(faker.name().fullName());
+            firstStudent.setEnrollmentId(faker.bothify("2025-???-###"));
+            firstStudent.setGuide(guide);
+
+            Student secondStudent = new Student();
+            secondStudent.setName(faker.name().fullName());
+            secondStudent.setEnrollmentId(faker.bothify("2025-???-###"));
+            secondStudent.setGuide(guide);
+
+            em.persist(firstStudent);
+            em.persist(secondStudent);
+
+            em.getTransaction().commit();
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+
+
+        try (EntityManager em = entityManagerFactory.createEntityManager()) {
+            em.getTransaction().begin();
+
+            Student firstStudentBySearching = em.find(Student.class, 1L);
+            Student secondStudentBySearching = em.find(Student.class, 2L);
+            Guide guide = em.find(Guide.class, 1L);
+
+            System.out.println("Before delete guide:");
+            System.out.println(firstStudentBySearching);
+            System.out.println(secondStudentBySearching);
+
+            em.remove(guide);
+
+
+
+            em.getTransaction().commit();
+
+            System.out.println("After delete guide:");
+            firstStudentBySearching = em.find(Student.class, 1L);
+            secondStudentBySearching = em.find(Student.class, 2L);
+            System.out.println(firstStudentBySearching);
+            System.out.println(secondStudentBySearching);
+        }catch (Exception exception) {
+            exception.printStackTrace();
+        }
+
+    }
+
+    public static void testStudentOrphanRemoval(EntityManagerFactory entityManagerFactory) {
+        Faker faker = new Faker();
+
+        try (EntityManager em = entityManagerFactory.createEntityManager()) {
+            em.getTransaction().begin();
+
+            Guide guide = new Guide();
+            guide.setName(faker.name().fullName());
+            guide.setSalary(faker.number().randomDouble(2, 1000, 10000));
+            guide.setStaffId(faker.bothify("2025-###-???"));
+
+            Student firstStudent = new Student();
+            firstStudent.setName(faker.name().fullName());
+            firstStudent.setEnrollmentId(faker.bothify("2025-???-###"));
+            firstStudent.setGuide(guide);
+
+            Student secondStudent = new Student();
+            secondStudent.setName(faker.name().fullName());
+            secondStudent.setEnrollmentId(faker.bothify("2025-???-###"));
+            secondStudent.setGuide(guide);
+
+            em.persist(firstStudent);
+            em.persist(secondStudent);
+
+            em.getTransaction().commit();
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+
+        try (EntityManager em = entityManagerFactory.createEntityManager()) {
+            em.getTransaction().begin();
+
+            Student firstStudentBySearching = em.find(Student.class, 1L);
+            Student secondStudentBySearching = em.find(Student.class, 2L);
+
+            System.out.println("Before delete fist student:");
+            System.out.println(firstStudentBySearching);
+            System.out.println(secondStudentBySearching);
+
+            em.remove(firstStudentBySearching);
+
+
+
+            em.getTransaction().commit();
+
+            System.out.println("After delete first student:");
+            firstStudentBySearching = em.find(Student.class, 1L);
+            secondStudentBySearching = em.find(Student.class, 2L);
+            System.out.println(firstStudentBySearching);
+            System.out.println(secondStudentBySearching);
+        }catch (Exception exception) {
+            exception.printStackTrace();
+        }
+
+    }
 }
