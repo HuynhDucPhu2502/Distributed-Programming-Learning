@@ -24,7 +24,7 @@ public class Movie {
     @EqualsAndHashCode.Include
     private String name;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST})
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     @JoinTable(
             name = "movies_actors",
             joinColumns = @JoinColumn(name = "movie_id"),

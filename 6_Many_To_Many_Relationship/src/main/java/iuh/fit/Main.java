@@ -20,7 +20,8 @@ public class Main {
 
 //        testAddActorsFromMovie(emf);
 //        testAddMoviesFromActor(emf);
-        testRemoveMoviesFromActor(emf);
+//        testRemoveMoviesFromActor(emf);
+//        testRemoveActorsFromMovie(emf);
     }
 
     private static void testAddActorsFromMovie(EntityManagerFactory emf) {
@@ -128,4 +129,57 @@ public class Main {
             em.getTransaction().commit();
         }
     }
+
+    private static void testRemoveActorsFromMovie(EntityManagerFactory emf) {
+        Faker faker = new Faker();
+
+        try (
+                EntityManager em = emf.createEntityManager()
+        )
+        {
+            em.getTransaction().begin();
+
+            Movie movie = new Movie();
+            movie.setName(faker.book().title());
+
+            IntStream
+                    .range(0, 2)
+                    .forEach(i -> {
+                        Actor actor = new Actor();
+                        actor.setName(faker.name().fullName());
+                        movie.getActors().add(actor);
+                    });
+
+            em.persist(movie);
+
+            em.getTransaction().commit();
+        }
+
+        try (
+                EntityManager em = emf.createEntityManager()
+        )
+        {
+            em.getTransaction().begin();
+
+            Movie movie = em.find(Movie.class, 1L);
+            System.out.println("Movie and Actors before movie remove:");
+            System.out.println(movie);
+            movie.getActors().forEach(System.out::println);
+
+            em.remove(movie);
+
+            em.getTransaction().commit();
+
+            movie = em.find(Movie.class, 1L);
+            System.out.println("Movie and Actors after movie remove:");
+            System.out.println(movie);
+            Actor firstActor = em.find(Actor.class, 1L);
+            Actor secondActor = em.find(Actor.class, 2L);
+            System.out.println(firstActor);
+            System.out.println(secondActor);
+
+        }
+    }
+
+
 }
