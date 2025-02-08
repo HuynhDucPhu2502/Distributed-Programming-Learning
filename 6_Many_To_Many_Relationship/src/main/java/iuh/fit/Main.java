@@ -1,0 +1,131 @@
+package iuh.fit;
+
+import iuh.fit.models.Actor;
+import iuh.fit.models.Movie;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
+import net.datafaker.Faker;
+
+import java.util.stream.IntStream;
+
+/**
+ * Admin 2/8/2025
+ * ${DESCRIPTION}
+ **///TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
+// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+public class Main {
+    public static void main(String[] args) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("mariadb");
+
+//        testAddActorsFromMovie(emf);
+//        testAddMoviesFromActor(emf);
+        testRemoveMoviesFromActor(emf);
+    }
+
+    private static void testAddActorsFromMovie(EntityManagerFactory emf) {
+        Faker faker = new Faker();
+
+        try (
+                EntityManager em = emf.createEntityManager()
+                )
+        {
+            em.getTransaction().begin();
+
+            Movie movie = new Movie();
+            movie.setName(faker.book().title());
+
+            IntStream
+                    .range(0, 2)
+                    .forEach(i -> {
+                        Actor actor = new Actor();
+                        actor.setName(faker.name().fullName());
+                        movie.getActors().add(actor);
+                    });
+
+            em.persist(movie);
+
+            em.getTransaction().commit();
+        }
+
+    }
+
+    private static void testAddMoviesFromActor(EntityManagerFactory emf) {
+        Faker faker = new Faker();
+
+        try (
+                EntityManager em = emf.createEntityManager()
+        )
+        {
+            em.getTransaction().begin();
+
+            Actor actor = new Actor();
+            actor.setName(faker.name().fullName());
+
+            IntStream
+                    .range(0, 2)
+                    .forEach(i -> {
+                        Movie movie = new Movie();
+                        movie.setName(faker.book().title());
+                        actor.addMovie(movie);
+                    });
+
+            em.persist(actor);
+
+
+            em.getTransaction().commit();
+        }
+    }
+
+    private static void testRemoveMoviesFromActor(EntityManagerFactory emf) {
+        Faker faker = new Faker();
+
+        try (
+                EntityManager em = emf.createEntityManager()
+        )
+        {
+            em.getTransaction().begin();
+
+            Actor actor = new Actor();
+            actor.setName(faker.name().fullName());
+
+            IntStream
+                    .range(0, 2)
+                    .forEach(i -> {
+                        Movie movie = new Movie();
+                        movie.setName(faker.book().title());
+                        actor.addMovie(movie);
+                    });
+
+            em.persist(actor);
+
+
+            em.getTransaction().commit();
+        }
+
+        try (
+                EntityManager em = emf.createEntityManager()
+        )
+        {
+            em.getTransaction().begin();
+
+            Movie firstMovie = em.find(Movie.class, 1L);
+            Movie secondMovie = em.find(Movie.class, 2L);
+            Actor actor = em.find(Actor.class, 1L);
+
+            System.out.println("Movies before remove:");
+            actor.getMovies().forEach(System.out::println);
+
+            actor.removeMoive(firstMovie);
+            actor.removeMoive(secondMovie);
+
+            actor = em.find(Actor.class, 1L);
+
+            System.out.println("Movies before remove:");
+            actor.getMovies().forEach(System.out::println);
+
+
+            em.getTransaction().commit();
+        }
+    }
+}
