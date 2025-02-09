@@ -19,9 +19,8 @@ import java.util.Set;
 @NoArgsConstructor
 public class Department {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "dept_id")
-    private Long id;
+    @Column(name = "dept_id", columnDefinition = "VARCHAR(50)")
+    private String id;
 
     private String location;
 

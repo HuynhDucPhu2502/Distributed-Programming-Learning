@@ -18,11 +18,10 @@ import java.util.Set;
 @NoArgsConstructor
 public class Project {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "project_id")
+    @Column(name = "project_id", columnDefinition = "VARCHAR(50)")
     private String id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "FLOAT")
     private double budget;
 
     @Column(name = "project_name")

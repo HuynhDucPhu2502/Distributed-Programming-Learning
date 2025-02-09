@@ -20,6 +20,7 @@ public class Profile {
 
     private String avatar;
 
+    @Column(columnDefinition = "TEXT")
     private String description;
 
     @OneToOne
