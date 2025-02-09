@@ -1,0 +1,19 @@
+package iuh.fit.models;
+
+import jakarta.persistence.Embeddable;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+/**
+ * Admin 2/8/2025
+ **/
+@Embeddable
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class Address {
+    private String zipcode;
+    private String street;
+    private String city;
+}
