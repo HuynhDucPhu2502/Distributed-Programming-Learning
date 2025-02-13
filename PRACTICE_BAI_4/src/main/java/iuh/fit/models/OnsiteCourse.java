@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class OnsiteCourse {
+public class OnsiteCourse extends Course {
     @Column(name = "Days")
     private String days;
     @Column(name = "Location")

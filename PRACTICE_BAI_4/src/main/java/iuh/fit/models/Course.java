@@ -13,6 +13,7 @@ import java.util.Set;
  **/
 @Entity
 @Table(name = "Course")
+@Inheritance(strategy = InheritanceType.JOINED)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
