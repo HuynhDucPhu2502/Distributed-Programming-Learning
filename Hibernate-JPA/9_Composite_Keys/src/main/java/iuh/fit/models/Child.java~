@@ -1,0 +1,27 @@
+package iuh.fit.models;
+
+import jakarta.persistence.*;
+
+/**
+ * Admin 2/9/2025
+ **/
+@Entity
+@Table(name = "child")
+@
+public class Child {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String name;
+
+    @ManyToOne
+    @JoinColumns({
+            @JoinColumn(name = "first_name", referencedColumnName = "firstName"),
+            @JoinColumn(name = "lastName", referencedColumnName = "lastName"),
+    })
+    private Parent parent;
+
+
+}

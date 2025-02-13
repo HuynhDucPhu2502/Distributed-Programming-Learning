@@ -1,0 +1,226 @@
+package iuh.fit;
+
+import iuh.fit.models.Guide;
+import iuh.fit.models.Student;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
+import net.datafaker.Faker;
+
+import java.util.stream.IntStream;
+
+/**
+ * Admin 2/4/2025
+ * ${DESCRIPTION}
+ **///TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
+// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+public class Main {
+    public static void main(String[] args) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("mariadb");
+
+//        testGuidePersistCascade(emf);
+//        testGuideUpdate(emf);
+//        testGuideRemove(emf);
+        testStudentOrphanRemoval(emf);
+    }
+
+    public static void testGuidePersistCascade(EntityManagerFactory entityManagerFactory) {
+        Faker faker = new Faker();
+
+        try (EntityManager em = entityManagerFactory.createEntityManager()) {
+            em.getTransaction().begin();
+
+            Guide guide = new Guide();
+            guide.setName(faker.name().fullName());
+            guide.setSalary(faker.number().randomDouble(2, 1000, 10000));
+            guide.setStaffId(faker.bothify("2025-###-???"));
+
+            Student firstStudent = new Student();
+            firstStudent.setName(faker.name().fullName());
+            firstStudent.setEnrollmentId(faker.bothify("2025-???-###"));
+            firstStudent.setGuide(guide);
+
+            Student secondStudent = new Student();
+            secondStudent.setName(faker.name().fullName());
+            secondStudent.setEnrollmentId(faker.bothify("2025-???-###"));
+            secondStudent.setGuide(guide);
+
+            guide.getStudents().add(firstStudent);
+            guide.getStudents().add(secondStudent);
+
+
+            em.persist(guide);
+            em.getTransaction().commit();
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+
+    }
+
+    public static void testGuideUpdate(EntityManagerFactory entityManagerFactory) {
+        Faker faker = new Faker();
+
+        try (EntityManager em = entityManagerFactory.createEntityManager()) {
+            em.getTransaction().begin();
+
+            Guide firstGuide = new Guide();
+            firstGuide.setName(faker.name().fullName());
+            firstGuide.setSalary(faker.number().randomDouble(2, 1000, 10000));
+            firstGuide.setStaffId(faker.bothify("2025-###-???"));
+
+            Guide secondGuide = new Guide();
+            secondGuide.setName(faker.name().fullName());
+            secondGuide.setSalary(faker.number().randomDouble(2, 1000, 10000));
+            secondGuide.setStaffId(faker.bothify("2025-###-???"));
+
+            Student firstStudent = new Student();
+            firstStudent.setName(faker.name().fullName());
+            firstStudent.setEnrollmentId(faker.bothify("2025-???-###"));
+            firstStudent.setGuide(firstGuide);
+
+            Student secondStudent = new Student();
+            secondStudent.setName(faker.name().fullName());
+            secondStudent.setEnrollmentId(faker.bothify("2025-???-###"));
+            secondStudent.setGuide(firstGuide);
+
+            firstGuide.getStudents().add(firstStudent);
+            firstGuide.getStudents().add(secondStudent);
+
+
+            em.persist(firstGuide);
+            em.persist(secondGuide);
+            em.getTransaction().commit();
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+
+        try (EntityManager em = entityManagerFactory.createEntityManager()) {
+            em.getTransaction().begin();
+
+            Guide guide = em.find(Guide.class, 2L);
+
+            Student firstStudent = em.find(Student.class, 1L);
+            Student secondStudent = em.find(Student.class, 2L);
+
+            guide.addStudent(firstStudent);
+            guide.addStudent(secondStudent);
+
+            em.getTransaction().commit();
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+
+    }
+
+    public static void testGuideRemove(EntityManagerFactory entityManagerFactory) {
+        Faker faker = new Faker();
+
+        try (EntityManager em = entityManagerFactory.createEntityManager()) {
+            em.getTransaction().begin();
+
+            Guide guide = new Guide();
+            guide.setName(faker.name().fullName());
+            guide.setSalary(faker.number().randomDouble(2, 1000, 10000));
+            guide.setStaffId(faker.bothify("2025-###-???"));
+
+            Student firstStudent = new Student();
+            firstStudent.setName(faker.name().fullName());
+            firstStudent.setEnrollmentId(faker.bothify("2025-???-###"));
+            firstStudent.setGuide(guide);
+
+            Student secondStudent = new Student();
+            secondStudent.setName(faker.name().fullName());
+            secondStudent.setEnrollmentId(faker.bothify("2025-???-###"));
+            secondStudent.setGuide(guide);
+
+            em.persist(firstStudent);
+            em.persist(secondStudent);
+
+            em.getTransaction().commit();
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+
+
+        try (EntityManager em = entityManagerFactory.createEntityManager()) {
+            em.getTransaction().begin();
+
+            Student firstStudentBySearching = em.find(Student.class, 1L);
+            Student secondStudentBySearching = em.find(Student.class, 2L);
+            Guide guide = em.find(Guide.class, 1L);
+
+            System.out.println("Before delete guide:");
+            System.out.println(firstStudentBySearching);
+            System.out.println(secondStudentBySearching);
+
+            em.remove(guide);
+
+
+
+            em.getTransaction().commit();
+
+            System.out.println("After delete guide:");
+            firstStudentBySearching = em.find(Student.class, 1L);
+            secondStudentBySearching = em.find(Student.class, 2L);
+            System.out.println(firstStudentBySearching);
+            System.out.println(secondStudentBySearching);
+        }catch (Exception exception) {
+            exception.printStackTrace();
+        }
+
+    }
+
+    public static void testStudentOrphanRemoval(EntityManagerFactory entityManagerFactory) {
+        Faker faker = new Faker();
+
+        try (EntityManager em = entityManagerFactory.createEntityManager()) {
+            em.getTransaction().begin();
+
+            Guide guide = new Guide();
+            guide.setName(faker.name().fullName());
+            guide.setSalary(faker.number().randomDouble(2, 1000, 10000));
+            guide.setStaffId(faker.bothify("2025-###-???"));
+
+            Student firstStudent = new Student();
+            firstStudent.setName(faker.name().fullName());
+            firstStudent.setEnrollmentId(faker.bothify("2025-???-###"));
+            firstStudent.setGuide(guide);
+
+            Student secondStudent = new Student();
+            secondStudent.setName(faker.name().fullName());
+            secondStudent.setEnrollmentId(faker.bothify("2025-???-###"));
+            secondStudent.setGuide(guide);
+
+            em.persist(guide);
+            em.getTransaction().commit();
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+
+        try (EntityManager em = entityManagerFactory.createEntityManager()) {
+            em.getTransaction().begin();
+
+            Student firstStudentBySearching = em.find(Student.class, 1L);
+            Student secondStudentBySearching = em.find(Student.class, 2L);
+
+            System.out.println("Before delete fist student:");
+            System.out.println(firstStudentBySearching);
+            System.out.println(secondStudentBySearching);
+
+            em.remove(firstStudentBySearching);
+
+
+
+            em.getTransaction().commit();
+
+            System.out.println("After delete first student:");
+            firstStudentBySearching = em.find(Student.class, 1L);
+            secondStudentBySearching = em.find(Student.class, 2L);
+            System.out.println(firstStudentBySearching);
+            System.out.println(secondStudentBySearching);
+        }catch (Exception exception) {
+            exception.printStackTrace();
+        }
+
+    }
+}
