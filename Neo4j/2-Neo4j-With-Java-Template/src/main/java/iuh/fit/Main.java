@@ -14,20 +14,27 @@ public class Main {
     public static void main(String[] args) throws JsonProcessingException {
 //        CourseDAO.listCourses(10, 0).forEach(System.out::println);
 //
-//        Course course = Course
-//                .builder()
-//                .courseId("456")
-//                .name("HDP")
-//                .hours(10)
-//                .departmentId("123")
-//                .build();
+        Course course = Course
+                .builder()
+                .courseId("456")
+                .name("HDP")
+                .hours(10)
+                .departmentId("123")
+                .build();
 //
 //        ObjectMapper objectMapper = new ObjectMapper();
 //        String json = objectMapper.writeValueAsString(course).replaceAll("\"([A-Za-z0-9_]+)\":", "$1:");
 //        System.out.println(json);
-//        System.out.println(CourseDAO.addCourse(course));;
+        System.out.println(CourseDAO.addCourse(course));
 
-        CourseDAO.listCourses(100, 0).forEach(System.out::println);
+//        CourseDAO.listCourses(100, 0).forEach(System.out::println);
+//        System.out.println(CourseDAO.deleteCourse("456"));
+
+        Course newCourse = Course.builder()
+                .courseId("456")
+                .name("SPRING BOOT RESTFUL API")
+                .build();
+        CourseDAO.updateCourse(newCourse);
 
     }
 }

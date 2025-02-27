@@ -57,4 +57,44 @@ public class CourseDAO {
             });
         }
     }
+
+    public static boolean deleteCourse(String courseId) {
+        String query =
+                """
+                MATCH (n:Course { course_id: $courseId })
+                DETACH DELETE n
+                """;
+        Map<String, Object> params = Map.of(
+                "courseId", courseId
+        );
+
+        try (Session session = Neo4jConnectionManager.getSession()) {
+            return session.executeWrite(transaction -> {
+                Result result = transaction.run(query, params);
+                ResultSummary resultSummary = result.consume();
+                return resultSummary.counters().nodesDeleted() > 0;
+            });
+        }
+    }
+
+    public static boolean updateCourse(Course course) {
+        String query =
+                """
+                MERGE (n:Course { course_id: $courseId })
+                SET n += $course
+                """;
+        Map<String, Object> params = Map.of(
+                "courseId", course.getCourseId(),
+                "course", Neo4jMapper.mapClassToJson(course)
+
+        );
+
+        try (Session session = Neo4jConnectionManager.getSession()) {
+            return session.executeWrite(transaction -> {
+                Result result = transaction.run(query, params);
+                ResultSummary resultSummary = result.consume();
+                return resultSummary.counters().propertiesSet() > 0;
+            });
+        }
+    }
 }
