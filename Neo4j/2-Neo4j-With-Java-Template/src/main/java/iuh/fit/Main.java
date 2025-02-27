@@ -1,20 +1,33 @@
 package iuh.fit;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import iuh.fit.daos.CourseDAO;
+import iuh.fit.models.Course;
+
 /**
  * Admin 2/27/2025
  * ${DESCRIPTION}
  **///TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
-    public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+    public static void main(String[] args) throws JsonProcessingException {
+//        CourseDAO.listCourses(10, 0).forEach(System.out::println);
+//
+//        Course course = Course
+//                .builder()
+//                .courseId("456")
+//                .name("HDP")
+//                .hours(10)
+//                .departmentId("123")
+//                .build();
+//
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        String json = objectMapper.writeValueAsString(course).replaceAll("\"([A-Za-z0-9_]+)\":", "$1:");
+//        System.out.println(json);
+//        System.out.println(CourseDAO.addCourse(course));;
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+        CourseDAO.listCourses(100, 0).forEach(System.out::println);
+
     }
 }
