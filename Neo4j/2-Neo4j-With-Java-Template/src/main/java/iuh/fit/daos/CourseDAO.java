@@ -96,4 +96,26 @@ public class CourseDAO {
             });
         }
     }
+
+    public static List<Course> getAllCourseByDepartmentId(String departmentId) {
+        String query =
+                """
+                MATCH (n:Course { dept_id: $departmentId })
+                RETURN n
+                """;
+        Map<String, Object> params = Map.of(
+                "departmentId", departmentId
+        );
+
+        try (Session session = Neo4jConnectionManager.getSession()) {
+            return session.executeRead(transaction ->
+                    transaction.run(query, params)
+                            .stream()
+                            .map(record ->
+                                    Neo4jMapper.mapNodeToClass(record.get("n").asNode(), Course.class)
+                            )
+                            .toList()
+            );
+        }
+    }
 }

@@ -46,14 +46,24 @@ public class Main {
 //        System.out.println(StudentDAO.enrollCourse("12", "IE102", 5.0));;
 
 //        System.out.println(StudentDAO.unEnrollCourse("12", "IE102"));
-        Student student = Student.builder()
-                .name("Admin")
-                .gpa(3.0)
-                .build();
-        System.out.println(StudentDAO.updateStudent(student, "3sfafsa3"));
-        StudentDAO.listStudent(100, 0).forEach(System.out::println);
+//        Student student = Student.builder()
+//                .name("Admin")
+//                .gpa(3.0)
+//                .build();
+//        System.out.println(StudentDAO.updateStudent(student, "3sfafsa3"));
+//        StudentDAO.listStudent(100, 0).forEach(System.out::println);
 
+//        System.out.println(StudentDAO.findStudentById("33"));
+//        System.out.println(DepartmentDAO.findDepartmenById("Math"));
+//        System.out.println(DepartmentDAO.updateDepartmentName("Math", "Mathematics"));
+//        System.out.println(DepartmentDAO.findDepartmenById("Math"));
+//        System.out.println(DepartmentDAO.getAllDepartmentDean());
+//        System.out.println(DepartmentDAO.getDeanByDepartmentId("Math"));
+//        System.out.println(CourseDAO.getAllCourseByDepartmentId("Math"));
+//        System.out.println(StudentDAO.getStudentNameEnrolledCourse("CS101"));
+//        System.out.println(DepartmentDAO.getNumberOfStudentByDepartment());
 
-
+//        System.out.println(DepartmentDAO.getDepartmentDeanWithMostStudent());
+            StudentDAO.getStudentAboveCertainGPASortAsc(1).forEach(System.out::println);
     }
 }

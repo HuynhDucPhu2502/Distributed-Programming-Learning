@@ -78,7 +78,7 @@ public class StudentDAO {
         }
     }
 
-        public static boolean updateStudent(Student student, String studentId) {
+    public static boolean updateStudent(Student student, String studentId) {
             String query =
                     """
                     MERGE (n:Student { student_id: $studentId })
@@ -98,6 +98,30 @@ public class StudentDAO {
                 });
             }
         }
+
+    public static Student findStudentById(String studentId) {
+        String query =
+                """
+                MATCH (s:Student{student_id: $studentId})
+                RETURN s
+                """;
+        Map<String, Object> params = Map.of(
+                "studentId", studentId
+        );
+
+        try (Session session = Neo4jConnectionManager.getSession()) {
+            return session.executeRead(transaction ->
+                    transaction
+                            .run(query, params)
+                            .stream()
+                            .map(record -> Neo4jMapper
+                                    .mapNodeToClass(record.get("s").asNode(), Student.class)
+                            )
+                            .findFirst()
+                            .orElse(null)
+            );
+        }
+    }
 
     public static List<Enrollment> listEnrollment(String studentId) {
         String query =
@@ -172,4 +196,48 @@ public class StudentDAO {
             });
         }
     }
+
+    public static List<String> getStudentNameEnrolledCourse(String courseId) {
+        String query =
+                """
+                MATCH (n:Student)-[r:ENROLLED_IN]->(c:Course {course_id: $courseId})
+                RETURN n.name AS studentName
+                """;
+        Map<String, Object> params = Map.of(
+                "courseId", courseId
+        );
+
+        try (Session session = Neo4jConnectionManager.getSession()) {
+            return session.executeRead(transaction ->
+                    transaction.run(query, params)
+                            .stream()
+                            .map(record -> record.get("studentName").asString())
+                            .toList()
+            );
+        }
+    }
+
+    public static List<Student> getStudentAboveCertainGPASortAsc(double certainGpa) {
+        String query =
+                """
+                MATCH (n:Student)
+                WHERE n.gpa >= $gpa
+                RETURN n
+                ORDER BY n.gpa ASC
+                """;
+        Map<String, Object> params = Map.of(
+                "gpa", certainGpa
+        );
+
+        try (Session session = Neo4jConnectionManager.getSession()) {
+            return session.executeRead(transaction ->
+                    transaction.run(query, params)
+                            .stream()
+                            .map(record -> Neo4jMapper.mapNodeToClass(record.get("n").asNode(), Student.class))
+                            .toList()
+            );
+        }
+    }
+
+
 }
