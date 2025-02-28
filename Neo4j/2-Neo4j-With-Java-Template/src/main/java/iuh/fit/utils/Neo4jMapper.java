@@ -24,12 +24,14 @@ public class Neo4jMapper {
         }
     }
 
-    public static Map<String, Object> mapClassToJson(Object object) {
+    public static Map<String, Object> mapClassToJson(Object object, String... excludeKeys) {
         if (object == null)
             throw new IllegalArgumentException("Không thể convert");
 
         try {
-            return OBJECT_MAPPER.convertValue(object, Map.class);
+            Map<String, Object> map = OBJECT_MAPPER.convertValue(object, Map.class);
+            for (String key : excludeKeys) map.remove(key);
+            return map;
         } catch (Exception e) {
             throw new RuntimeException("Không thể convert qua Json");
         }
