@@ -1,0 +1,31 @@
+package iuh.fit.demo6;
+
+import java.util.ArrayList;
+import java.util.Vector;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.stream.IntStream;
+
+/**
+ * Admin 3/10/2025
+ **/
+public class DemoThreadSyncList {
+    private static Counter counter = new Counter();
+    private static ArrayList<Runnable> list = new ArrayList<>();
+
+    public static void main(String[] args) throws Exception {
+        ExecutorService pool = Executors.newCachedThreadPool();
+
+        for (int i = 0; i < 10; i++) {
+            list.add(() -> IntStream.range(0, 1000).forEach(t -> counter.increaseWithSync()));
+            list.add(() -> IntStream.range(0, 1000).forEach(t -> counter.increaseWithSync()));
+            list.add(() -> IntStream.range(0, 1000).forEach(t -> counter.increaseWithSync()));
+        }
+
+        list.forEach(x -> pool.submit(x));
+        pool.shutdown();
+        while (!pool.isTerminated()) {}
+        System.out.println("Counter: " + counter.getCount());
+    }
+}
