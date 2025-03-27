@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 /**
  * Admin 2/11/2025
@@ -23,5 +24,5 @@ public class OnsiteCourse extends Course {
     @Column(name = "Location")
     private String location;
     @Column(name = "Time")
-    private LocalDateTime time;
+    private LocalTime time;
 }

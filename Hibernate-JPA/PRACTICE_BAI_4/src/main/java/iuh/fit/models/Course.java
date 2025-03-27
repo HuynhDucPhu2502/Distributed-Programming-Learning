@@ -35,7 +35,7 @@ public abstract class Course {
 
     @ManyToMany
     @JoinTable(
-            name = "CourseIntructor",
+            name = "CourseInstructor",
             joinColumns = @JoinColumn(name = "CourseID"),
             inverseJoinColumns = @JoinColumn(name = "PersonID")
     )

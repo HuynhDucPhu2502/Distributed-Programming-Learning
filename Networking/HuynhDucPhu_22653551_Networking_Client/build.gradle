@@ -1,0 +1,24 @@
+plugins {
+    id 'java'
+}
+
+group = 'iuh.fit'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation(files("HuynhDucPhu_22653551_Networking-1.0-SNAPSHOT.jar"))
+
+    compileOnly ("org.projectlombok:lombok:1.18.36")
+    annotationProcessor("org.projectlombok:lombok:1.18.36")
+    implementation ("com.google.code.gson:gson:2.12.1")
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+test {
+    useJUnitPlatform()
+}

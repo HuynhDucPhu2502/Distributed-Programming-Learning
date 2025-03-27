@@ -1,5 +1,7 @@
 package iuh.fit;
 
+import iuh.fit.daos.PersonDAO;
+import iuh.fit.utils.JPAUtil;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
@@ -10,6 +12,8 @@ import jakarta.persistence.Persistence;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("mariadb");
+        PersonDAO.getAll().forEach(System.out::println);
+
+        JPAUtil.close();
     }
 }
