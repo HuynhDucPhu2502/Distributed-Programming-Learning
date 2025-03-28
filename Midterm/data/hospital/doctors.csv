@@ -1,0 +1,27 @@
+ID,Name,Phone,Speciality,DepartmentID
+DR.001,John Smith,0987.654.321,Dermatology Services,DEP001
+DR.002,Michael Johnson,0123.456.789,Cardiology Research,DEP003
+DR.003,David Williams,0567.123.890,Orthopedics and Sports Medicine,DEP005
+DR.004,James Brown,0345.678.901,General Surgery,DEP002
+DR.005,Robert Jones,0789.234.567,Internal Medicine,DEP001
+DR.006,William Garcia,0456.789.012,Neurology and Neurosurgery,DEP004
+DR.007,Charles Martinez,0234.567.890,Obstetrics and Gynecology,DEP006
+DR.008,Joseph Robinson,0678.901.234,Pediatrics and Adolescent Medicine,DEP007
+DR.009,Thomas Clark,0890.123.456,ENT and Audiology,DEP008
+DR.010,Daniel Rodriguez,0567.890.123,Ophthalmology and Optometry,DEP009
+DR.011,Mark Lewis,0123.456.789,Psychiatry Laboratory,DEP010
+DR.012,Paul Lee,0456.789.012,Anesthesiology and Pain Management,DEP011
+DR.013,Donald Walker,0789.234.567,Radiology Oncology,DEP012
+DR.014,George Hall,0345.678.901,Pathology Of Laboratory,DEP013
+DR.015,Kenneth Young,0789.234.567,Physical Medicine and Rehabilitation,DEP015
+DR.016,Edward Hernandez,0456.789.012,Preventive Medicine,DEP016
+DR.017,Brian King,0789.234.567,Family Medicine,DEP017
+DR.018,Ronald Wright,0345.678.901,Community Medicine,DEP018
+DR.019,Anthony Lopez,0789.234.567,Occupational Medicine,DEP019
+DR.020,Kevin Hill,0345.678.901,Internal Medicine,DEP001
+DR.021,Christopher Scott,0789.234.567,Cardiology,DEP003
+DR.022,Mark Green,0345.678.901,Surgery,DEP002
+DR.023,James Adams,0789.234.567,Adult Medicine,DEP001
+DR.024,Robert Baker,0345.678.901,Adolescent Medicine,DEP001
+DR.025,William King,0789.234.567,Allergy and Immunology,DEP001
+DR.026,Edward Young,0345.678.901,Bariatric Surgery,DEP002

@@ -1,0 +1,21 @@
+DoctorID,PatientID,StartDate,EndDate,Diagnosis
+DR.013,PT007,2022-01-01,2022-01-02,Throat infection (tonsillitis)
+DR.001,PT001,2021-01-01,2021-01-10,Common cold - fever
+DR.012,PT002,2021-04-05,2021-04-07,Heart disease (follow-up)
+DR.007,PT007,2021-01-30,2021-02-08,Pregnancy (test in progress)
+DR.008,PT008,2021-02-04,2021-02-14,Chickenpox (varicella)
+DR.009,PT009,2021-02-08,2021-02-18,Ear infection (otitis)
+DR.018,PT009,2021-03-16,2021-03-26,Community health
+DR.019,PT001,2021-03-20,2021-03-30,Occupational therapy
+DR.020,PT002,2021-03-24,2021-04-03,Internal medicine
+DR.001,PT003,2021-03-28,2021-04-07,Dermatology
+DR.004,PT006,2021-04-09,2021-04-19,General surgery
+DR.005,PT007,2021-04-13,2021-04-23,Internal medicine
+DR.006,PT002,2021-02-17,2021-02-17,Neurology (consultation)
+DR.010,PT004,2021-08-21,2021-09-01,Eye examination (ophthalmology)
+DR.011,PT005,2021-03-25,2021-04-05,Psychiatry
+DR.014,PT006,2021-04-15,2021-04-25,Pathology
+DR.015,PT007,2021-04-19,2021-04-29,Physical therapy
+DR.016,PT008,2021-04-23,2021-05-03,Preventive medicine
+DR.017,PT009,2021-04-27,2021-05-07,Family medicine
+DR.018,PT001,2021-05-01,2021-05-11,Community medicine

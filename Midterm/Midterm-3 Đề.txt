@@ -1,0 +1,31 @@
+====================================
+ĐỀ BÀI
+====================================
+
+Câu 1: Tìm Doctor bằng ID
++ findDoctoyById (doctorID: String): Doctor
+
+Câu 2: Thống kê số bác sỹ theo từng chuyên khoa (speciality) của một khoa (department)
+nào đó khi biết tên khoa.
++ getNoOfDoctorsBySpeciality (departmentName: String) : Map<String, Long>
+//Key: Chuyên khoa; Value: Số bác sỹ
+
+====================================
+IMPORT CYPHER SCRIPT
+====================================
+// department
+LOAD CSV WITH HEADERS FROM "file:///hospital/departments.csv" AS rowDept
+CREATE (d:Department)
+SET d.dept_id = rowDept.id, d.name = rowDept.name, d.location = rowDept.location;
+
+// doctor
+LOAD CSV WITH HEADERS FROM "file:///hospital/doctors.csv" AS rowDoctor
+CREATE (doc:Doctor)
+SET doc.doctor_id = rowDoctor.ID, doc.name = rowDoctor.Name, doc.phone = rowDoctor.Phone,
+doc.speciality = rowDoctor.Speciality, doc.dept_id = rowDoctor.DepartmentID;
+
+// relationship between Doctor and Department
+MATCH (doc:Doctor), (dept:Department)
+  WHERE doc.dept_id = dept.dept_id
+MERGE (dept)<-[r:BELONG_TO]-(doc);
+

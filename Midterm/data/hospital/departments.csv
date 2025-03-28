@@ -1,0 +1,20 @@
+id,name,location
+DEP001,Internal Medicine,3rd Floor
+DEP002,General Surgery,5th Floor
+DEP003,Cardiology,2nd Floor
+DEP004,Neurology,4th Floor
+DEP005,Orthopedics,6th Floor
+DEP006,Obstetrics and Gynecology,7th Floor
+DEP007,Pediatrics,8th Floor
+DEP008,ENT,9th Floor
+DEP009,Ophthalmology,10th Floor
+DEP010,Dermatology,11th Floor
+DEP011,Psychiatry,12th Floor
+DEP012,Anesthesiology,13th Floor
+DEP013,Radiology,14th Floor
+DEP014,Pathology,15th Floor
+DEP015,Physical Medicine and Rehabilitation,16th Floor
+DEP016,Preventive Medicine,17th Floor
+DEP017,Family Medicine,18th Floor
+DEP018,Community Medicine,19th Floor
+DEP019,Occupational Medicine,20th Floor
