@@ -1,0 +1,57 @@
+====================================
+ĐỀ BÀI
+====================================
+
+Câu 1: Tìm Doctor bằng ID
++ findDoctoyById (doctorID: String): Doctor
+
+Câu 2: Thống kê số bác sỹ theo từng chuyên khoa (speciality) của một khoa (department)
+nào đó khi biết tên khoa.
++ getNoOfDoctorsBySpeciality (departmentName: String) : Map<String, Long>
+//Key: Chuyên khoa; Value: Số bác sỹ
+
+Câu 3: Thêm mới một bác sỹ.
++ addDoctor (doctor: Doctor) : boolean
+
+Câu 4: Dùng full-text search, tìm kiếm các bác sỹ theo chuyên khoa.
++ listDoctorsBySpeciality (keyword: String): List<Doctor>
+
+Câu 5: Cập nhật lại chẩn đoán (diagnosis) của một lượt điều trị khi biết mã số bác sỹ và mã
+số bệnh nhân. Lưu ý, chỉ được phép cập nhật khi lượt điều trị này vẫn còn đang điều
+trị (tức ngày kết thúc điều trị là null)
++ updateDiagnosis(patientID: String, doctorID: String, newDiagnosis: String):
+boolean
+
+====================================
+IMPORT CYPHER SCRIPT
+====================================
+// department
+LOAD CSV WITH HEADERS FROM "file:///hospital/departments.csv" AS rowDept
+CREATE (d:Department)
+SET d.dept_id = rowDept.id, d.name = rowDept.name, d.location = rowDept.location;
+
+// doctor
+LOAD CSV WITH HEADERS FROM "file:///hospital/doctors.csv" AS rowDoctor
+CREATE (doc:Doctor)
+SET doc.doctor_id = rowDoctor.ID, doc.name = rowDoctor.Name, doc.phone = rowDoctor.Phone,
+doc.speciality = rowDoctor.Speciality, doc.dept_id = rowDoctor.DepartmentID;
+
+// relationship between Doctor and Department
+MATCH (doc:Doctor), (dept:Department)
+  WHERE doc.dept_id = dept.dept_id
+MERGE (dept)<-[r:BELONG_TO]-(doc);
+
+// patient
+LOAD CSV WITH HEADERS FROM "file:///hospital/patients.csv" AS rowPatient
+CREATE (p:Patient)
+SET p.patient_id = rowPatient.ID, p.name = rowPatient.Name, p.phone = rowPatient.Phone,
+p.gender = rowPatient.Gender, p.dateOfBirth = rowPatient.DateOfBirth, p.address = rowPatient.Address;
+
+//  relationship between Patient and Doctor
+LOAD CSV WITH HEADERS FROM "file:///hospital/treatments.csv" AS rowTreatments
+MATCH (d:Doctor) where d.doctor_id = rowTreatments.DoctorID
+MATCH (p:Patient) where p.patient_id = rowTreatments.PatientID
+MERGE (p)-[r:BE_TREATED]->(d)
+SET r.startDate = rowTreatments.StartDate, r.endDate = rowTreatments.EndDate,
+r.diagnosis = rowTreatments.Diagnosis
+
