@@ -1,0 +1,23 @@
+package iuh.fit.model;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
+import java.time.LocalDate;
+
+/**
+ * Admin 3/30/2025
+ **/
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+public class Treatment implements Serializable {
+    private LocalDate startDate;
+    private LocalDate endDate;
+    private String diagnosis;
+
+    private transient Doctor doctor;
+    private transient 
+}

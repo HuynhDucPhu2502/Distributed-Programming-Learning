@@ -1,0 +1,43 @@
+// Department
+LOAD CSV WITH HEADERS FROM "file:///hospital2/departments.csv" AS row
+WITH row WHERE row.id IS NOT NULL
+CREATE (d:Department {id: row.id})
+SET d += row;
+// Doctor
+LOAD CSV WITH HEADERS FROM "file:///hospital2/doctors.csv" AS row
+WITH row WHERE row.id IS NOT NULL
+CREATE (d:Doctor {id: row.id})
+SET d += row;
+
+MATCH (d:Doctor)
+REMOVE d.departmentID;
+// Patient
+LOAD CSV WITH HEADERS FROM "file:///hospital2/patients.csv" AS row
+WITH row WHERE row.id IS NOT NULL
+CREATE (p:Patient {id: row.id})
+SET p += row;
+
+// BELONG_TO
+LOAD CSV WITH HEADERS FROM "file:///hospital2/doctors.csv" AS row
+WITH row WHERE row.id IS NOT NULL
+MATCH (doc:Doctor {id: row.id})
+MATCH (dep:Department {id: row.departmentID})
+MERGE (doc)-[r:BELONG_TO]->(dep);
+
+// BE_TREATED
+LOAD CSV WITH HEADERS FROM "file:///hospital2/treatments.csv" AS row
+WITH row WHERE row.DoctorID IS NOT NULL AND row.PatientID IS NOT NULL
+MATCH (d:Doctor {id: row.DoctorID})
+MATCH (p:Patient {id: row.PatientID})
+MERGE (d)<-[r:BE_TREATED]-(p)
+SET r.startDate = row.StartDate, r.endDate = row.EndDate, r.diagnosis = row.Diagnosis;
+
+// UNIQUE
+CREATE CONSTRAINT dep_id
+FOR (d:Department) REQUIRE d.id IS UNIQUE
+
+CREATE CONSTRAINT doc_id
+FOR (d:Doctor) REQUIRE d.id IS UNIQUE
+
+CREATE CONSTRAINT patient_id
+FOR (p:Patient) REQUIRE p.id IS UNIQUE

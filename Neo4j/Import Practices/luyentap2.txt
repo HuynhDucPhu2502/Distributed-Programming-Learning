@@ -1,0 +1,30 @@
+// DEPARTMENT
+LOAD CSV WITH HEADERS FROM "file:///hospital/departments.csv" AS row
+WITH row WHERE row.id IS NOT NULL
+CREATE (d:Department{id: row.id})
+SET d.name = row.name, d.location = row.location;
+// DOCTOR
+LOAD CSV WITH HEADERS FROM "file:///hospital/doctors.csv" AS row
+WITH row WHERE row.ID IS NOT NULL
+CREATE (d:Doctor{id: row.ID})
+SET d.name = row.Name, d.phone = row.Phone, d.speciality = row.Speciality;
+// PATIENT
+LOAD CSV WITH HEADERS FROM "file:///hospital/patients.csv" AS row
+WITH row WHERE row.ID IS NOT NULL
+CREATE (p:Patient{id: row.ID})
+SET p.name = row.Name, p.phone = row.Phone, p.gender = row.Gender, 
+p.dateOfBirth = row.DateOfBirth, p.address = row.Address;
+// LOAD RELATIONSHIP DOCTOR AND DEPARTMENT
+LOAD CSV WITH HEADERS FROM "file:///hospital/doctors.csv" AS row
+WITH row WHERE row.ID IS NOT NULL AND row.DepartmentID IS NOT NULL
+MATCH (doc:Doctor {id: row.ID})
+MATCH (dept:Department {id: row.DepartmentID})
+MERGE (doc)-[r:BELONG_TO]->(dept);
+// LOAD RELATIONSHIP DOCTOR AND PATIENT
+LOAD CSV WITH HEADERS FROM "file:///hospital/treatments.csv" AS row
+WITH row WHERE row.DoctorID IS NOT NULL AND row.PatientID IS NOT NULL
+MATCH (d:Doctor {id: row.DoctorID})
+MATCH (p:Patient {id: row.PatientID})
+MERGE (d)<-[r:BE_TREATED]-(p)
+SET r.startDate = row.StartDate, r.endDate = row.EndDate, r.diagnosis = row.Diagnosis ;
+ 

@@ -1,0 +1,17 @@
+package iuh.fit;
+
+import java.net.ServerSocket;
+
+/**
+ * Admin 3/30/2025
+ **/
+public class Server {
+    public static void main(String[] args) {
+        try (ServerSocket serverSocket = new ServerSocket(9090)) {
+            System.out.println("Server is on");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}

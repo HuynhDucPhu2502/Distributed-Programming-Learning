@@ -1,0 +1,33 @@
+// DEPARTMENT
+LOAD CSV WITH HEADERS FROM "file:///hospital2/departments.csv" AS row
+WITH row WHERE row.id IS NOT NULL
+CREATE (d:Department {id: row.id})
+SET d += row;
+// DOCTOR
+LOAD CSV WITH HEADERS FROM "file:///hospital2/doctors.csv" AS row
+WITH row WHERE row.id IS NOT NULL
+CREATE (d:Doctor {id: row.id})
+SET d += row;
+
+MATCH (d:Doctor)
+REMOVE d.departmentID;
+// PATIENT
+LOAD CSV WITH HEADERS FROM "file:///hospital2/patients.csv" AS row
+WITH row WHERE row.id IS NOT NULL
+CREATE (p:Patient {id: row.id})
+SET p += row;
+
+// BELONG_TO RELATIONSHIP
+LOAD CSV WITH HEADERS FROM "file:///hospital2/doctors.csv" AS row
+WITH row WHERE row.id IS NOT NULL AND row.departmentID IS NOT NULL
+MATCH (doc:Doctor {id: row.id})
+MATCH (dep:Department {id: row.departmentID})
+MERGE (doc)-[r:BELONG_TO]->(dep);
+
+// BE_TREATED
+LOAD CSV WITH HEADERS FROM "file:///hospital2/treatments.csv" AS row
+WITH row WHERE row.DoctorID IS NOT NULL AND row.PatientID IS NOT NULL
+MATCH (d:Doctor {id: row.DoctorID})
+MATCH (p:Patient {id: row.PatientID})
+MERGE (d)<-[r:BE_TREATED]-(p);
+

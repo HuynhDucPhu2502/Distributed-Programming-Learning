@@ -1,0 +1,22 @@
+package iuh.fit;
+
+import iuh.fit.dao.DoctorDAO;
+import iuh.fit.model.Doctor;
+
+/**
+ * Admin 3/30/2025
+ * ${DESCRIPTION}
+ **/
+public class Main {
+    public static void main(String[] args) {
+        DoctorDAO doctorDAO = new DoctorDAO();
+
+
+//        Doctor doctor = new Doctor("DR.123", "IUH", "456", "Test");
+//        doctorDAO.addDoctor(doctor);
+
+//        doctorDAO.getNoOfDoctorsBySpeciality("Internal Medicine")
+//                .forEach((k, v) -> System.out.println(k + ":" + v));
+
+    }
+}
