@@ -62,7 +62,8 @@ public class HandlingClient implements Runnable {
                     }
                     case "SEARCH" -> {
                         out.writeObject(movieDAO.listPersonByKeyword(in.readUTF()));
-                        out.flush();
+                        out.flush();;
+
                     }
 
                 }

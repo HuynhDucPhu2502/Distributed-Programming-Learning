@@ -37,19 +37,55 @@ public class Client {
 
                 switch (choice) {
                     case 1 -> {
-
+                        out.writeUTF("CONTAINS_NAME");
+                        System.out.print("Nhập tên phim: ");
+                        out.writeUTF(sc.nextLine());
+                        out.flush();
+                        List<Movie> res = (List<Movie>)in.readObject();
+                        res.forEach(System.out::println);
                     }
                     case 2 -> {
-
+                        out.writeUTF("CREATE_MOVIE");
+                        System.out.print("Nhập title: ");
+                        out.writeUTF(sc.nextLine());
+                        System.out.print("Nhập tagline: ");
+                        out.writeUTF(sc.nextLine());
+                        System.out.print("Nhập released: ");
+                        out.writeInt(sc.nextInt());
+                        sc.nextLine();
+                        out.flush();
+                        boolean isAdded = in.readBoolean();
+                        System.out.println(isAdded ? "Thêm thành công" : "Thêm thất bại");
                     }
                     case 3 -> {
-
+                        out.writeUTF("LIST_MOVIES_BY_ACTOR_AND_RELEASED");
+                        System.out.print("Nhập actorName: ");
+                        out.writeUTF(sc.nextLine());
+                        System.out.print("Nhập released: ");
+                        out.writeInt(sc.nextInt());
+                        sc.nextLine();
+                        List<Movie> res = (List<Movie>)in.readObject();
+                        res.forEach(System.out::println);
                     }
                     case 4 -> {
-
+                        out.writeUTF("GET_NO_MOVIES_PER_ACTOR_BY_RELEASED_YEAR");
+                        System.out.print("Nhập năm từ: ");
+                        out.writeInt(sc.nextInt());
+                        sc.nextLine();
+                        System.out.print("Nhập năm đến: ");
+                        out.writeInt(sc.nextInt());
+                        sc.nextLine();
+                        out.flush();
+                        Map<String, Long> res = (Map<String, Long>) in.readObject();
+                        res.forEach((k, v) -> System.out.println(k + ": " + v));
                     }
                     case 5 -> {
-                        
+                        out.writeInt("SEARCH");
+                        System.out.print("Nhập keyword: ");
+                        out.writeUTF(sc.nextLine());
+                        out.flush();
+                        List<Person> res = (List<Person>)in.readObject();
+                        res.forEach(System.out::println);
                     }
 
                     case 6 -> {
