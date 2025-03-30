@@ -1,0 +1,14 @@
+Câu 1: Liệt kê danh sách những phim mà tiêu đề có chứa từ
++ listMoviesContainsName(String name): List<Movie> 
+
+Câu 2: Thêm mới một bộ phim
++ createMovie(Movie movie): boolean
+
+Câu 3: Liệt kê danh sách các bộ phim theo diễn viên tên đóng và năm phát hành 
++ listMoviesByActorAndReleased(String actorName, int released): List<Movie>
+
+Câu 4: Thống kê số lượng phim mà diễn viên đã đóng trong khoảng năm
++ getNoOfMoviePerActorByReleasedRange(int from, int to): Map<String, Long>
+
+Câu 5: Dùng full-text search, tìm kiếm các diễn viên chứa tên keyword
++ listPersonByKeyword(String keyword): List<Person>
