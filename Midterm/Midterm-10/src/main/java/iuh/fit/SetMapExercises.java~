@@ -1,0 +1,100 @@
+package iuh.fit;
+
+import java.util.*;
+
+/**
+ * Admin 4/1/2025
+ **/
+public class SetMapExercises {
+    // Bài 1: Khởi tạo và Thao tác với Set
+    public void exercise1() {
+        Set<String> cities = new HashSet<>(Arrays.asList("Hà Nội", "TP HCM", "Đà Nẵng", "Hải Phòng"));
+        System.out.println("Huế có tồn tại? " + cities.contains("Huế"));
+        cities.remove("Hải Phòng");
+        System.out.println("Danh sách thành phố: " + cities);
+    }
+
+    // Bài 2: Duyệt và Sắp xếp Set
+    public void exercise2() {
+        Set<Integer> numbers = new TreeSet<>(Arrays.asList(5, 3, 9, 1, 4));
+        System.out.println("Các số: " + numbers);
+        numbers.remove(((TreeSet<Integer>) numbers).first());
+        numbers.remove(((TreeSet<Integer>) numbers).last());
+        System.out.println("Sau khi xóa: " + numbers);
+    }
+
+    // Bài 3: Giao và Hợp của Set
+    public void exercise3() {
+        Set<String> setA = new HashSet<>(Arrays.asList("apple", "banana", "cherry"));
+        Set<String> setB = new HashSet<>(Arrays.asList("banana", "cherry", "date", "fig"));
+
+        Set<String> intersection = new HashSet<>(setA);
+        intersection.retainAll(setB);
+        System.out.println("Giao: " + intersection);
+
+        Set<String> union = new HashSet<>(setA);
+        union.addAll(setB);
+        System.out.println("Hợp: " + union);
+    }
+
+    // Bài 4: Đếm từ trong chuỗi
+    public void exercise4(String input) {
+        Map<String, Integer> wordCount = new HashMap<>();
+        for (String word : input.split(" ")) {
+            wordCount.put(word, wordCount.getOrDefault(word, 0) + 1);
+        }
+        System.out.println("Từ và tần suất: " + wordCount);
+    }
+
+    // Bài 5: Tần suất số nguyên
+    public void exercise5(int[] numbers) {
+        Map<Integer, Integer> frequency = new HashMap<>();
+        for (int num : numbers) {
+            frequency.put(num, frequency.getOrDefault(num, 0) + 1);
+        }
+        System.out.println("Tần suất: " + frequency);
+    }
+
+    // Bài 6: Duyệt và Sắp xếp Map
+    public void exercise6() {
+        Map<String, Double> scores = new HashMap<>();
+        scores.put("An", 8.5);
+        scores.put("Bình", 7.0);
+        scores.put("Cường", 9.0);
+        scores.put("Dũng", 6.5);
+
+        scores.entrySet().stream()
+                .sorted(Map.Entry.comparingByKey())
+                .forEach(entry -> System.out.println(entry.getKey() + ": " + entry.getValue()));
+    }
+
+    // Bài 7: Sử dụng EnumMap
+    public void exercise7() {
+        EnumMap<Day, String> schedule = new EnumMap<>(Day.class);
+        schedule.put(Day.MONDAY, "Đi làm");
+        schedule.put(Day.SATURDAY, "Đi chơi");
+        schedule.put(Day.SUNDAY, "Nghỉ ngơi");
+
+        for (Day day : Day.values()) {
+            System.out.println(day + ": " + schedule.getOrDefault(day, "Không có kế hoạch"));
+        }
+    }
+
+    // Bài 8: Sử dụng LinkedHashSet để lưu trữ theo thứ tự chèn
+    public void exercise8() {
+        Set<String> linkedSet = new LinkedHashSet<>();
+        linkedSet.add("C");
+        linkedSet.add("A");
+        linkedSet.add("D");
+        linkedSet.add("B");
+        linkedSet.add("E");
+
+        System.out.println("LinkedHashSet ban đầu: " + linkedSet);
+
+        linkedSet.remove("D");
+        System.out.println("LinkedHashSet sau khi xóa 'D': " + linkedSet);
+
+        boolean containsB = linkedSet.contains("B");
+        System.out.println("Có chứa 'B'? " + containsB);
+    }
+}

@@ -7,6 +7,8 @@ import org.neo4j.driver.Session;
 import org.neo4j.driver.summary.ResultSummary;
 import org.neo4j.driver.types.Node;
 
+import java.util.Comparator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -62,6 +64,15 @@ public class DoctorDAO {
                         .collect(Collectors.toMap(
                                 r -> r.get("speciality").asString(),
                                 r -> r.get("total").asLong()
+                        ))
+                        .entrySet()
+                        .stream()
+                        .sorted(Map.Entry.comparingByKey())
+                        .collect(Collectors.toMap(
+                                Map.Entry::getKey,
+                                Map.Entry::getValue,
+                                (e1, e2) -> e1,
+                                LinkedHashMap::new
                         ));
             });
         }
