@@ -1,0 +1,14 @@
+package iuh.fit.model;
+
+import java.time.LocalDate;
+
+/**
+ * Admin 4/1/2025
+ **/
+public class Approval {
+    private transient User user;
+    private transient Post post;
+
+    private LocalDate approveDate;
+    private Status status;
+}

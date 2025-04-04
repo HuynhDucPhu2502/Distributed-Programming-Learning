@@ -63,14 +63,7 @@ public class DoctorDAO {
                         .stream()
                         .collect(Collectors.toMap(
                                 r -> r.get("speciality").asString(),
-                                r -> r.get("total").asLong()
-                        ))
-                        .entrySet()
-                        .stream()
-                        .sorted(Map.Entry.comparingByKey())
-                        .collect(Collectors.toMap(
-                                Map.Entry::getKey,
-                                Map.Entry::getValue,
+                                r -> r.get("total").asLong(),
                                 (e1, e2) -> e1,
                                 LinkedHashMap::new
                         ));

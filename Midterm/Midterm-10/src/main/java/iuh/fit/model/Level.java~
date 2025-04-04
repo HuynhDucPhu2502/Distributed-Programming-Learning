@@ -1,0 +1,13 @@
+package iuh.fit.model;
+
+/**
+ * Admin 4/1/2025
+ **/
+public enum Level {
+    EASY, MEDIUM, HARD;    
+
+    public static Level fromString(String input) {
+        return Level.valueOf(input.toUpperCase());
+    }
+
+}

@@ -14,20 +14,4 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-    <dependencies>
-        <!-- https://mvnrepository.com/artifact/org.neo4j.driver/neo4j-java-driver -->
-        <dependency>
-            <groupId>org.neo4j.driver</groupId>
-            <artifactId>neo4j-java-driver</artifactId>
-            <version>5.28.4</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.36</version>
-            <scope>provided</scope>
-        </dependency>
-    </dependencies>
-
 </project>
