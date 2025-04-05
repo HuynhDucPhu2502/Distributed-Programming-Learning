@@ -1,15 +1,8 @@
 package iuh.fit.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 /**
  * Admin 4/4/2025
  **/
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
 public class Student {
     private String name;
     private int age;

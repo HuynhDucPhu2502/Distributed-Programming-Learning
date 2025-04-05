@@ -1,6 +1,6 @@
 [
     {
-        "name": "Mark",
+        "name": "Math",
         "teacher": "Mr. Smith",
         "room": 101,
         "start_time": "8:00 AM",
@@ -8,8 +8,8 @@
         "students": [
             {
                 "name": "Alice",
-                "age": "Alice",
-                "gpa": "Alice",
+                "age": 20,
+                "gpa": 3.5,
                 "address": {
                     "street": "123 Main St",
                     "city": "Springfield",
@@ -19,8 +19,8 @@
             },
             {
                 "name": "Bob",
-                "age": "Bob",
-                "gpa": "Bob",
+                "age": 21,
+                "gpa": 3.8,
                 "address": {
                     "street": "456 Elm St",
                     "city": "Springfield",
@@ -39,8 +39,8 @@
         "students": [
             {
                 "name": "Charlie",
-                "age": "Charlie",
-                "gpa": "Charlie",
+                "age": 22,
+                "gpa": 3.7,
                 "address": {
                     "street": "789 Maple Ave",
                     "city": "Metropolis",
@@ -50,8 +50,8 @@
             },
             {
                 "name": "Daisy",
-                "age": "Daisy",
-                "gpa": "Daisy",
+                "age": 23,
+                "gpa": 3.6,
                 "address": {
                     "street": "321 Oak St",
                     "city": "Metropolis",
@@ -70,8 +70,8 @@
         "students": [
             {
                 "name": "Edward",
-                "age": "Edward",
-                "gpa": "Edward",
+                "age": 19,
+                "gpa": 3.4,
                 "address": {
                     "street": "654 Pine St",
                     "city": "Gotham",
@@ -81,8 +81,8 @@
             },
             {
                 "name": "Fiona",
-                "age": "Fiona",
-                "gpa": "Fiona",
+                "age": 20,
+                "gpa": 3.9,
                 "address": {
                     "street": "987 Birch Blvd",
                     "city": "Gotham",

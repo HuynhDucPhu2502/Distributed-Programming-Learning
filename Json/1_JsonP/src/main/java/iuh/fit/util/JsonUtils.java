@@ -14,73 +14,77 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Admin 4/4/2025
- **/
+ *  Admin 4/4/2025
+ *  
+**/
+
+
 public class JsonUtils {
-    // Huynh Duc Phu was here!!!!
 
-
-    // fromJson từ json map qua POJO Class (Java Class)
     public static List<ClassInfo> fromJson(String fileName) {
         List<ClassInfo> res = new ArrayList<>();
 
         try (JsonReader reader = Json.createReader(new FileReader(fileName))) {
-            // Cấp 0
             JsonArray classInfoJsonArray = reader.readArray();
 
             classInfoJsonArray.forEach(classInfoValue -> {
-                JsonObject classInfoObject = classInfoValue.asJsonObject();
+                JsonObject classInfoJsonObject = classInfoValue.asJsonObject();
 
-                String name = classInfoObject.getString("name");
-                String teacher = classInfoObject.getString("teacher");
-                int room = classInfoObject.getInt("room");
-                String startTime = classInfoObject.getString("start_time");
-                String endTime = classInfoObject.getString("end_time");
+                String name = classInfoJsonObject.getString("name");
+                String teacher = classInfoJsonObject.getString("teacher");
+                int room = classInfoJsonObject.getInt("room");
+                String startTime = classInfoJsonObject.getString("start_time");
+                String endTime = classInfoJsonObject.getString("end_time");
 
                 List<Student> students = new ArrayList<>();
-                JsonArray studentJsonArray = classInfoObject.getJsonArray("students");
-                studentJsonArray.forEach(studentValue -> {
-                    JsonObject studentObject = studentValue.asJsonObject();
+                JsonArray studentsJsonArray = classInfoJsonObject.getJsonArray("students");
+                studentsJsonArray.forEach(studentValue -> {
+                    JsonObject studentJsonObject = studentValue.asJsonObject();
 
-                    String studentName = studentObject.getString("name");
-                    int age = studentObject.getInt("age");
-                    double gpa = studentObject.getJsonNumber("gpa").doubleValue();
-                    JsonObject addressObject = studentObject.getJsonObject("address");
+                    String studentName = studentJsonObject.getString("name");
+                    int age = studentJsonObject.getInt("age");
+                    double gpa = studentJsonObject.getJsonNumber("gpa").doubleValue();
 
+                    JsonObject addressJsonObject = studentJsonObject.getJsonObject("address");
                     Address address = new Address(
-                            addressObject.getString("street"),
-                            addressObject.getString("city"),
-                            addressObject.getString("state"),
-                            addressObject.getString("zip")
+                            addressJsonObject.getString("street"),
+                            addressJsonObject.getString("city"),
+                            addressJsonObject.getString("state"),
+                            addressJsonObject.getString("zip")
                     );
 
                     Student student = new Student(studentName, age, gpa, address);
                     students.add(student);
+
                 });
 
                 ClassInfo classInfo = new ClassInfo(
                         name, teacher, room,
                         startTime, endTime, students
                 );
+
                 res.add(classInfo);
+
+
             });
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+
+
         return res;
     }
 
-
-    // toJsonAndWriteToFile từ java ra json file
-    public static void toJsonAndWriteToFile(List<ClassInfo> classInfos, String fileName) {
-        // config
+    public static void writeJsonToFile(String fileName, List<ClassInfo> classInfos) {
+        // Config
         Map<String, Object> config = new HashMap<>();
         config.put(JsonGenerator.PRETTY_PRINTING, true);
         JsonWriterFactory jsonWriterFactory = Json.createWriterFactory(config);
 
         try (JsonWriter writer = jsonWriterFactory.createWriter(new FileWriter(fileName))) {
-            // Cấp 0
             JsonArrayBuilder classInfoJsonArray = Json.createArrayBuilder();
 
             classInfos.forEach(classInfoValue -> {
@@ -92,47 +96,40 @@ public class JsonUtils {
                         .add("start_time", classInfoValue.getStartTime())
                         .add("end_time", classInfoValue.getEndTime());
 
-                // Student Array Object
-                // ===============================================================================
-                JsonArrayBuilder studentJsonArray = Json.createArrayBuilder();
-                classInfoValue.getStudents().forEach(studentInfoValue -> {
-                    // Student Object
-                    // ===========================================================
+                JsonArrayBuilder studentsJsonArray = Json.createArrayBuilder();
+
+                classInfoValue.getStudentList().forEach(studentValue -> {
                     JsonObjectBuilder studentObject = Json
                             .createObjectBuilder()
-                            .add("name", studentInfoValue.getName())
-                            .add("age", studentInfoValue.getName())
-                            .add("gpa", studentInfoValue.getName());
+                            .add("name", studentValue.getName())
+                            .add("age", studentValue.getAge())
+                            .add("gpa", studentValue.getGpa());
 
-                    // Address Object
-                    // =====================================
-                    Address address = studentInfoValue.getAddress();
-                    JsonObjectBuilder addressObject = Json
+                    Address address = studentValue.getAddress();
+                    JsonObject addressObject = Json
                             .createObjectBuilder()
                             .add("street", address.getStreet())
                             .add("city", address.getCity())
                             .add("state", address.getState())
-                            .add("zip", address.getZip());
-                    // =====================================
+                            .add("zip", address.getZip())
+                            .build();
 
                     studentObject.add("address", addressObject);
-                    // ===========================================================
 
-
-                    studentJsonArray.add(studentObject);
+                    studentsJsonArray.add(studentObject);
                 });
-                // ===============================================================================
 
-                classInfoObject.add("students", studentJsonArray);
+                classInfoObject.add("students", studentsJsonArray);
                 classInfoJsonArray.add(classInfoObject);
             });
 
-
             writer.writeArray(classInfoJsonArray.build());
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
 
+    }
 
 }

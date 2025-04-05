@@ -1,0 +1,48 @@
+{
+  "id": 1,
+  "altSpellings": [
+    "VN",
+    "Socialist Republic of Vietnam",
+    "Cộng hòa Xã hội chủ nghĩa Việt Nam",
+    "Viet Nam"
+  ],
+  "area": 331212,
+  "borders": [
+    "KHM",
+    "CHN",
+    "LAO"
+  ],
+  "callingCode": [
+    "84"
+  ],
+  "capital": "Hanoi",
+  "cca2": "VN",
+  "cioc": "VIE",
+  "currency": [
+    "VND"
+  ],
+  "demonym": "Vietnamese",
+  "landLocked": false,
+  "latlng": [
+    16.16666666,
+    107.83333333
+  ],
+  "name": {
+    "common": "Vietnam",
+    "official": "Socialist Republic of Vietnam"
+  },
+  "region": "Asia",
+  "subregion": "South-Eastern Asia",
+  "translations": {
+    "fra": {
+      "common": "Viêt Nam",
+      "official": "République socialiste du Vietnam"
+    },
+    "ita": {
+      "common": "Vietnam",
+      "official": "Repubblica socialista del Vietnam"
+    }
+  },
+
+
+}

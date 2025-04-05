@@ -19,5 +19,5 @@ public class ClassInfo {
     private String startTime;
     private String endTime;
 
-    private List<Student> students;
+    private List<Student> studentList;
 }

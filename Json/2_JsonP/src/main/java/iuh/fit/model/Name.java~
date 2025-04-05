@@ -1,0 +1,10 @@
+package iuh.fit.model;
+
+/**
+ * Admin 4/5/2025
+ **/
+
+public class Name {
+    private String common;
+    private String official;
+}

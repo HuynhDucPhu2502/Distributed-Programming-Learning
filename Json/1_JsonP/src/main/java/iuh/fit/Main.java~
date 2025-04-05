@@ -1,8 +1,7 @@
 package iuh.fit;
 
 import iuh.fit.model.ClassInfo;
-import iuh.fit.util.JsonUtils_Practice1;
-import iuh.fit.util.JsonUtils_Practice2;
+import iuh.fit.util.JsonUtils;
 
 import java.util.List;
 
@@ -12,8 +11,8 @@ import java.util.List;
  **/
 public class Main {
     public static void main(String[] args) {
-        List<ClassInfo> classes = JsonUtils_Practice2.fromJson("json/classes.json");
-        classes.forEach(System.out::println);
-        JsonUtils_Practice2.toJsonAndWriteToFile(classes, "json/classes2.json");
+        List<ClassInfo> classInfos = JsonUtils.fromJson("json/classes.json");
+        classInfos.forEach(System.out::println);
+        JsonUtils.
     }
 }

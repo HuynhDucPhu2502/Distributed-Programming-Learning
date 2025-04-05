@@ -5,14 +5,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * Admin 4/4/2025
+ * Admin 4/5/2025
  **/
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Student {
-    private String name;
-    private int age;
-    private double gpa;
-    private Address address;
+public class Name {
+    private String common;
+    private String official;
 }

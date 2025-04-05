@@ -11,8 +11,8 @@ import java.util.List;
  **/
 public class Main {
     public static void main(String[] args) {
-        List<ClassInfo> classes = JsonUtils.fromJson("json/classes.json");
-        classes.forEach(System.out::println);
-        JsonUtils.toJsonAndWriteToFile(classes, "json/classes2.json");
+        List<ClassInfo> classInfos = JsonUtils.fromJson("json/classes.json");
+        classInfos.forEach(System.out::println);
+        JsonUtils.writeJsonToFile("json/classes2.json", classInfos);
     }
 }
