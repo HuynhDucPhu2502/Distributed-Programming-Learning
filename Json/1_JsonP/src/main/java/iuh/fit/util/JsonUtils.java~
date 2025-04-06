@@ -120,7 +120,7 @@ public class JsonUtils {
 
             });
 
-            writer.writeArray(classInfoJsonArray.build());
+            writer.writeArray(classInfoJsonArray);
 
         } catch (Exception e) {
             e.printStackTrace();
