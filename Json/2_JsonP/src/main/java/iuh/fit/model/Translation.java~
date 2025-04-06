@@ -1,9 +1,7 @@
 package iuh.fit.model;
 
 /**
- * Admin 4/5/2025
- **/
-public class Translation {
-    private String common;
-    private String official;
+ *  Admin 4/6/2025
+ *  
+**/public class Translation {
 }
