@@ -7,8 +7,9 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 /**
- * Admin 4/7/2025
- **/
+ *  Admin 4/7/2025
+ *  
+**/
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -19,5 +20,5 @@ public class Person {
 
     private Address address;
 
-    private List<Phonenumber> phoneNumbers;
+    private List<PhoneNumber> phoneNumbers;
 }

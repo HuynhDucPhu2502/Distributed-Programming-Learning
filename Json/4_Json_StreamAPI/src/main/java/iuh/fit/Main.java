@@ -13,6 +13,6 @@ public class Main {
     public static void main(String[] args) {
         List<Person> people = JsonUtils.fromJson("json/People.json");
         people.forEach(System.out::println);
-        JsonUtils.writeToJson(people, "json/people2.json");
+        JsonUtils.writeToFile(people, "json/people2.json");
     }
 }

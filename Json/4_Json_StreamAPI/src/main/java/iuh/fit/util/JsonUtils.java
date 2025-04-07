@@ -2,7 +2,7 @@ package iuh.fit.util;
 
 import iuh.fit.model.Address;
 import iuh.fit.model.Person;
-import iuh.fit.model.Phonenumber;
+import iuh.fit.model.PhoneNumber;
 import jakarta.json.Json;
 import jakarta.json.stream.JsonGenerator;
 import jakarta.json.stream.JsonGeneratorFactory;
@@ -10,7 +10,10 @@ import jakarta.json.stream.JsonParser;
 
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Admin 4/7/2025
@@ -18,17 +21,17 @@ import java.util.*;
 public class JsonUtils {
 
     public static List<Person> fromJson(String fileName) {
-        List<Person> res = new ArrayList<>();
+        List<Person>  res = new ArrayList<>();
 
         try (JsonParser parser = Json.createParser(new FileReader(fileName))) {
+
             Person person = null;
             Address address = null;
-            List<Phonenumber> phonenumbers = null;
+            List<PhoneNumber> phoneNumbers = null;
 
-            Phonenumber phonenumber = null;
+            PhoneNumber phoneNumber = null;
 
             String key = "";
-
 
             while (parser.hasNext()) {
                 JsonParser.Event event = parser.next();
@@ -36,7 +39,7 @@ public class JsonUtils {
                 switch (event) {
                     case START_ARRAY -> {
                         if (key.equalsIgnoreCase("phoneNumbers")) {
-                            phonenumbers = new ArrayList<>();
+                            phoneNumbers = new ArrayList<>();
                         }
                     }
 
@@ -46,25 +49,23 @@ public class JsonUtils {
                         } else if (address == null
                                 && key.equalsIgnoreCase("address")) {
                             address = new Address();
-                        } else if (phonenumber == null) {
-                            phonenumber = new Phonenumber();
+                        } else if (phoneNumber == null) {
+                            phoneNumber = new PhoneNumber();
                         }
-
                     }
-                    case END_OBJECT -> {
+                    case END_OBJECT -> { // }
                         if (address != null) {
                             person.setAddress(address);
                             address = null;
-                        } else if (phonenumber != null) {
-                            phonenumbers.add(phonenumber);
-                            phonenumber = null;
+                        } else if (phoneNumber != null) {
+                            phoneNumbers.add(phoneNumber);
+                            phoneNumber = null;
                         } else if (person != null) {
-                            person.setPhoneNumbers(phonenumbers);
+                            person.setPhoneNumbers(phoneNumbers);
                             res.add(person);
-                            phonenumbers =  null;
+                            phoneNumbers = null;
                             person = null;
                         }
-
                     }
                     case KEY_NAME -> {
                         key = parser.getString();
@@ -78,8 +79,8 @@ public class JsonUtils {
                             case "streetAddress" -> address.setStreetAddress(value);
                             case "city" -> address.setCity(value);
                             case "state" -> address.setState(value);
-                            case "type" -> phonenumber.setType(value);
-                            case "number" -> phonenumber.setNumber(value);
+                            case "type" -> phoneNumber.setType(value);
+                            case "number" -> phoneNumber.setNumber(value);
                         }
                     }
                     case VALUE_NUMBER -> {
@@ -89,8 +90,10 @@ public class JsonUtils {
                             case "age" -> person.setAge(value);
                             case "postalCode" -> address.setPostalCode(value);
                         }
+
                     }
                 }
+
 
             }
 
@@ -102,7 +105,8 @@ public class JsonUtils {
         return res;
     }
 
-    public static void writeToJson(List<Person> people, String fileName) {
+
+    public static void writeToFile(List<Person> people, String fileName) {
         // config
         Map<String, Object> config = new HashMap<>();
         config.put(JsonGenerator.PRETTY_PRINTING, true);
@@ -122,13 +126,13 @@ public class JsonUtils {
                 jsonGenerator.writeStartObject("address");
                 jsonGenerator.write("streetAddress", address.getStreetAddress());
                 jsonGenerator.write("city", address.getCity());
-                jsonGenerator.write("state", address.getStreetAddress());
+                jsonGenerator.write("state", address.getState());
                 jsonGenerator.write("postalCode", address.getPostalCode());
                 jsonGenerator.writeEnd();
 
-                List<Phonenumber> phonenumbers = person.getPhoneNumbers();
+                List<PhoneNumber> phoneNumbers = person.getPhoneNumbers();
                 jsonGenerator.writeStartArray("phoneNumbers");
-                phonenumbers.forEach(phoneNumber -> {
+                phoneNumbers.forEach(phoneNumber -> {
                     jsonGenerator.writeStartObject();
                     jsonGenerator.write("type", phoneNumber.getType());
                     jsonGenerator.write("number", phoneNumber.getNumber());
@@ -140,12 +144,12 @@ public class JsonUtils {
                 jsonGenerator.writeEnd();
             });
 
+
             jsonGenerator.writeEnd();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
-
 
 }

@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Phonenumber {
+public class PhoneNumber {
     private String type;
     private String number;
 }
