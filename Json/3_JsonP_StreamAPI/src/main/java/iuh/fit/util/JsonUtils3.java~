@@ -1,0 +1,116 @@
+package iuh.fit.util;
+
+import iuh.fit.model.Address;
+import iuh.fit.model.ClassInfo;
+import iuh.fit.model.Student;
+import jakarta.json.Json;
+import jakarta.json.stream.JsonParser;
+
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Admin 4/6/2025
+ **/
+public class JsonUtils3 {
+
+    public static List<ClassInfo> toJson(String fileName) {
+        List<ClassInfo> res = new ArrayList<>();
+
+        try (JsonParser parser = Json.createParser(new FileReader(fileName))) {
+            ClassInfo classInfo = null;
+            List<Student> students = null;
+
+            Student student = null;
+            Address address = null;
+
+            String key = "";
+            String currentObject = "";
+
+            while (parser.hasNext()) {
+                JsonParser.Event event = parser.next();
+
+                switch (event) {
+//                    case START_ARRAY -> {
+//                        if ("students".equals(key)) {
+//                            students = new ArrayList<>();
+//                        }
+//                    }
+//                    case END_ARRAY -> {
+//                    }
+                    case START_OBJECT -> {
+                        if (classInfo == null) {
+                            classInfo = new ClassInfo();
+                            currentObject = "classInfo";
+                        } else if (student == null) {
+                            student = new Student();
+                            currentObject = "student";
+                        } else if (address == null) {
+                            address = new Address();
+                            currentObject = "address";
+                        }
+                    }
+                    case END_OBJECT -> {
+                        if ("address".equals(currentObject)) {
+                            student.setAddress(address);
+                            address = null;
+                            currentObject = "student";
+                        } else if ("student".equals(currentObject)) {
+                            students.add(student);
+                            student = null;
+                            currentObject = "classInfo";
+                        } else if ("classInfo".equals(currentObject)) {
+                            classInfo.setStudents(students);
+                            res.add(classInfo);
+                            classInfo = null;
+                        }
+                    }
+                    case KEY_NAME -> {
+                        key = parser.getString();
+                    }
+                    case VALUE_STRING -> {
+                        String value = parser.getString();
+                        switch (key) {
+                            case "name":
+                                if ("classInfo".equals(currentObject)) classInfo.setName(value);
+                                else if ("student".equals(currentObject)) student.setName(value);
+                                break;
+                            case "teacher":
+                                classInfo.setTeacher(value);
+                                break;
+                            case "start_time":
+                                classInfo.setStartTime(value);
+                                break;
+                            case "end_time":
+                                classInfo.setEndTime(value);
+                                break;
+                            case "street":
+                                address.setStreet(value);
+                                break;
+                            case "city":
+                                address.setCity(value);
+                                break;
+                            case "state":
+                                address.setState(value);
+                                break;
+                            case "zip":
+                                address.setZip(value);
+                                break;
+                        }
+                    }
+                    case VALUE_NUMBER -> {
+                        if ("age".equals(key)) student.setAge(parser.getInt());
+                        else if ("room".equals(key)) classInfo.setRoom(parser.getInt());
+                        else if ("gpa".equals(key)) student.setGpa(parser.getBigDecimal().doubleValue());
+                    }
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return res;
+    }
+}
