@@ -13,5 +13,6 @@ public class Main {
     public static void main(String[] args) {
         List<ClassInfo> res = JsonUtils.fromJson("json/classes.json");
         res.forEach(System.out::println);
+        JsonUtils.writeToFile(res, "json/classes2.json");
     }
 }
