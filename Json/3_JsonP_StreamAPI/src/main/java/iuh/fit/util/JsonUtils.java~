@@ -4,11 +4,13 @@ import iuh.fit.model.Address;
 import iuh.fit.model.ClassInfo;
 import iuh.fit.model.Student;
 import jakarta.json.Json;
+import jakarta.json.stream.JsonGenerator;
+import jakarta.json.stream.JsonGeneratorFactory;
 import jakarta.json.stream.JsonParser;
 
 import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.FileWriter;
+import java.util.*;
 
 /**
  *  Admin 4/7/2025
@@ -17,7 +19,7 @@ import java.util.List;
 
 public class JsonUtils {
 
-    public List<ClassInfo> fromJson(String fileName) {
+    public static List<ClassInfo> fromJson(String fileName) {
         List<ClassInfo> res = new ArrayList<>();
 
         try (JsonParser parser = Json.createParser(new FileReader(fileName))) {
@@ -108,5 +110,57 @@ public class JsonUtils {
 
         return res;
     }
+
+    public static void writeToFile(List<ClassInfo> classInfos, String fileName) {
+        // config
+        Map<String, Object> config = new HashMap<>();
+        config.put(JsonGenerator.PRETTY_PRINTING, true);
+        JsonGeneratorFactory jsonGeneratorFactory = Json.createGeneratorFactory(config);
+
+        try (JsonGenerator jsonGenerator = jsonGeneratorFactory.createGenerator(new FileWriter(fileName))) {
+
+            jsonGenerator.writeStartArray();
+
+            classInfos.forEach(classInfo -> {
+                jsonGenerator.writeStartObject();
+                jsonGenerator.write("name", classInfo.getName());
+                jsonGenerator.write("teacher", classInfo.getTeacher());
+                jsonGenerator.write("room", classInfo.getRoom());
+                jsonGenerator.write("start_time", classInfo.getStartTime());
+                jsonGenerator.write("end_time", classInfo.getEndTime());
+
+                jsonGenerator.writeStartArray("students");
+                classInfo.getStudents().forEach(student -> {
+                    jsonGenerator.writeStartObject();
+                    jsonGenerator.write("name", student.getName());
+                    jsonGenerator.write("age", student.getAge());
+                    jsonGenerator.write("gpa", student.getGpa());
+
+                    Address address = student.getAddress();
+                    jsonGenerator.writeStartObject("address");
+                    jsonGenerator.write("street", address.getName());
+                    jsonGenerator.writeEnd();
+
+
+
+                    jsonGenerator.writeEnd();
+                });
+                jsonGenerator.writeEnd();
+
+
+                jsonGenerator.writeEnd();
+            });
+
+
+
+            jsonGenerator.writeEnd();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+
+    }
+
 
 }
