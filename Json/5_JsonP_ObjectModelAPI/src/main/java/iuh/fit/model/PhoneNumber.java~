@@ -1,0 +1,9 @@
+package iuh.fit.model;
+
+/**
+ * Admin 4/14/2025
+ **/
+public class PhoneNumber {
+    private String type;
+    private String number;
+}

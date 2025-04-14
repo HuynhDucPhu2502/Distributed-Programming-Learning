@@ -1,0 +1,196 @@
+[
+    {
+        "firstName": "Francis",
+        "lastName": "Brown",
+        "age": 38,
+        "address": {
+            "streetAddress": "66627 Fredric Via",
+            "city": "66627 Fredric Via",
+            "state": "66627 Fredric Via",
+            "postalCode": 76602
+        },
+        "phoneNumbers": [
+            {
+                "type": "Fax",
+                "number": "(505) 250-6368"
+            },
+            {
+                "type": "Work",
+                "number": "(586) 650-0945"
+            }
+        ]
+    },
+    {
+        "firstName": "Lashawnda",
+        "lastName": "Altenwerth",
+        "age": 21,
+        "address": {
+            "streetAddress": "000 Borer Bypass",
+            "city": "000 Borer Bypass",
+            "state": "000 Borer Bypass",
+            "postalCode": 13938
+        },
+        "phoneNumbers": [
+            {
+                "type": "Home",
+                "number": "(983) 428-2340"
+            },
+            {
+                "type": "Home",
+                "number": "(920) 369-4051"
+            }
+        ]
+    },
+    {
+        "firstName": "Cristobal",
+        "lastName": "Breitenberg",
+        "age": 57,
+        "address": {
+            "streetAddress": "91200 Aufderhar Ramp",
+            "city": "91200 Aufderhar Ramp",
+            "state": "91200 Aufderhar Ramp",
+            "postalCode": 24986
+        },
+        "phoneNumbers": [
+            {
+                "type": "Work",
+                "number": "(730) 643-6960"
+            },
+            {
+                "type": "Work",
+                "number": "(763) 394-4248"
+            },
+            {
+                "type": "Work",
+                "number": "(505) 628-1399"
+            }
+        ]
+    },
+    {
+        "firstName": "Ellen",
+        "lastName": "Greenholt",
+        "age": 32,
+        "address": {
+            "streetAddress": "04701 Candy Viaduct",
+            "city": "04701 Candy Viaduct",
+            "state": "04701 Candy Viaduct",
+            "postalCode": 89465
+        },
+        "phoneNumbers": [
+            {
+                "type": "Work",
+                "number": "(281) 312-1595"
+            },
+            {
+                "type": "Fax",
+                "number": "(505) 644-3103"
+            }
+        ]
+    },
+    {
+        "firstName": "Daren",
+        "lastName": "Mitchell",
+        "age": 59,
+        "address": {
+            "streetAddress": "01143 Rolland Island",
+            "city": "01143 Rolland Island",
+            "state": "01143 Rolland Island",
+            "postalCode": 35957
+        },
+        "phoneNumbers": [
+            {
+                "type": "Home",
+                "number": "(730) 242-2649"
+            },
+            {
+                "type": "Home",
+                "number": "(305) 206-1764"
+            },
+            {
+                "type": "Home",
+                "number": "(754) 684-0389"
+            }
+        ]
+    },
+    {
+        "firstName": "Emmanuel",
+        "lastName": "Boehm",
+        "age": 32,
+        "address": {
+            "streetAddress": "87322 Klein Pike",
+            "city": "87322 Klein Pike",
+            "state": "87322 Klein Pike",
+            "postalCode": 23023
+        },
+        "phoneNumbers": [
+        ]
+    },
+    {
+        "firstName": "Emilia",
+        "lastName": "Deckow",
+        "age": 34,
+        "address": {
+            "streetAddress": "93992 Britney Place",
+            "city": "93992 Britney Place",
+            "state": "93992 Britney Place",
+            "postalCode": 5108
+        },
+        "phoneNumbers": [
+        ]
+    },
+    {
+        "firstName": "Tristan",
+        "lastName": "Ernser",
+        "age": 57,
+        "address": {
+            "streetAddress": "58318 Cormier Terrace",
+            "city": "58318 Cormier Terrace",
+            "state": "58318 Cormier Terrace",
+            "postalCode": 10996
+        },
+        "phoneNumbers": [
+            {
+                "type": "Fax",
+                "number": "(730) 222-9477"
+            }
+        ]
+    },
+    {
+        "firstName": "Lorrine",
+        "lastName": "Stamm",
+        "age": 25,
+        "address": {
+            "streetAddress": "525 Maribel Divide",
+            "city": "525 Maribel Divide",
+            "state": "525 Maribel Divide",
+            "postalCode": 97556
+        },
+        "phoneNumbers": [
+            {
+                "type": "Fax",
+                "number": "(305) 250-7225"
+            }
+        ]
+    },
+    {
+        "firstName": "Vernie",
+        "lastName": "Lakin",
+        "age": 55,
+        "address": {
+            "streetAddress": "096 Haley Burg",
+            "city": "096 Haley Burg",
+            "state": "096 Haley Burg",
+            "postalCode": 57078
+        },
+        "phoneNumbers": [
+            {
+                "type": "Work",
+                "number": "(505) 648-6394"
+            },
+            {
+                "type": "Fax",
+                "number": "(505) 644-5393"
+            }
+        ]
+    }
+]

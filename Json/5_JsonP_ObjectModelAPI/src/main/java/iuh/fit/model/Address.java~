@@ -1,0 +1,11 @@
+package iuh.fit.model;
+
+/**
+ * Admin 4/14/2025
+ **/
+public class Address {
+    private String streetAddress;
+    private String city;
+    private String state;
+    private int postalCode;
+}
