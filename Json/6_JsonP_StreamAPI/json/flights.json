@@ -1,0 +1,64 @@
+[
+  {
+    "flightNumber": "VN123",
+    "airline": "Vietnam Airlines",
+    "departure": {
+      "city": "Hà Nội",
+      "airport": "Noi Bai International Airport",
+      "time": "2025-04-15T06:30:00"
+    },
+    "arrival": {
+      "city": "TP.HCM",
+      "airport": "Tan Son Nhat International Airport",
+      "time": "2025-04-15T08:45:00"
+    },
+    "passengers": [
+      {
+        "name": "Nguyen Van A",
+        "age": 35,
+        "passport": "B1234567",
+        "seat": "12A",
+        "baggage": {
+          "checkedIn": true,
+          "weightKg": 20
+        }
+      },
+      {
+        "name": "Tran Thi B",
+        "age": 28,
+        "passport": "C9876543",
+        "seat": "12B",
+        "baggage": {
+          "checkedIn": false,
+          "weightKg": 0
+        }
+      }
+    ]
+  },
+  {
+    "flightNumber": "VJ456",
+    "airline": "VietJet Air",
+    "departure": {
+      "city": "Đà Nẵng",
+      "airport": "Da Nang International Airport",
+      "time": "2025-04-16T14:15:00"
+    },
+    "arrival": {
+      "city": "Nha Trang",
+      "airport": "Cam Ranh International Airport",
+      "time": "2025-04-16T15:05:00"
+    },
+    "passengers": [
+      {
+        "name": "Le Quang C",
+        "age": 40,
+        "passport": "D1122334",
+        "seat": "8C",
+        "baggage": {
+          "checkedIn": true,
+          "weightKg": 18
+        }
+      }
+    ]
+  }
+]
