@@ -1,0 +1,14 @@
+package iuh.fit.service;
+
+import java.rmi.Remote;
+import java.util.List;
+
+/**
+ * Admin 4/14/2025
+ **/
+public interface GenericService<T, ID> extends Remote {
+    T findByID(ID id);
+    List<T> getAll();
+    boolean save(T t);
+    boolean update(T t);
+}

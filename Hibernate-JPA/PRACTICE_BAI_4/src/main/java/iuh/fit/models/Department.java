@@ -1,9 +1,7 @@
 package iuh.fit.models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -36,6 +34,8 @@ public class Department {
     private LocalDateTime startDate;
 
     @OneToMany(mappedBy = "department")
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     private Set<Course> courses = new HashSet<>();
 
 }

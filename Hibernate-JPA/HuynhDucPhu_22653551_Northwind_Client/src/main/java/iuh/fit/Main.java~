@@ -1,0 +1,22 @@
+package iuh.fit;
+
+import iuh.fit.service.ProductService;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+
+/**
+ * Admin 4/14/2025
+ * ${DESCRIPTION}
+ **/
+public class Main {
+    public static void main(String[] args) throws Exception {
+        Context context = new InitialContext();
+
+        // Kết nối đến RMI server (đổi IP nếu cần)
+        ProductService productService = (ProductService) context.lookup("rmi://Admin-PC:8080/ProductService");
+
+        // Gọi phương thức từ xa
+        productService.getAll().forEach(System.out::println);
+    }
+}
