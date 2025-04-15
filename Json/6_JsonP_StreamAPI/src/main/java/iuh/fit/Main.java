@@ -13,5 +13,6 @@ public class Main {
     public static void main(String[] args) {
         List<Flight> res = JsonUtils.fromJson("json/flights.json");
         res.forEach(System.out::println);
+        JsonUtils.writeToJson(res, "json/flights2.json");
     }
 }

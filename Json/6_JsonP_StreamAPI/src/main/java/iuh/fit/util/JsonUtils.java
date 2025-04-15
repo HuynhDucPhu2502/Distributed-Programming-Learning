@@ -5,12 +5,16 @@ import iuh.fit.model.Flight;
 import iuh.fit.model.FlightLocation;
 import iuh.fit.model.Passenger;
 import jakarta.json.Json;
+import jakarta.json.stream.JsonGenerator;
+import jakarta.json.stream.JsonGeneratorFactory;
 import jakarta.json.stream.JsonParser;
 
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  *  Admin 4/14/2025
@@ -130,6 +134,70 @@ public class JsonUtils {
 
         return res;
     }
+
+
+    public static void writeToJson(List<Flight> flights, String fileName) {
+        // config
+        Map<String, Object> config = Map.of(JsonGenerator.PRETTY_PRINTING, true);
+        JsonGeneratorFactory jsonGeneratorFactory = Json.createGeneratorFactory(config);
+
+        try (JsonGenerator jsonGenerator = jsonGeneratorFactory.createGenerator(new FileWriter(fileName))) {
+
+            jsonGenerator.writeStartArray();
+
+            flights.forEach(flight -> {
+                jsonGenerator.writeStartObject();
+
+                jsonGenerator.write("flightNumber", flight.getFlightNumber());
+                jsonGenerator.write("airline", flight.getAirline());
+
+                FlightLocation departure = flight.getDeparture();
+                jsonGenerator.writeStartObject("departure");
+                jsonGenerator.write("city", departure.getCity());
+                jsonGenerator.write("airport", departure.getAirport());
+                jsonGenerator.write("time", departure.getTime().toString());
+                jsonGenerator.writeEnd();
+
+                FlightLocation arrival = flight.getArrival();
+                jsonGenerator.writeStartObject("arrival");
+                jsonGenerator.write("city", arrival.getCity());
+                jsonGenerator.write("airport", arrival.getAirport());
+                jsonGenerator.write("time", arrival.getTime().toString());
+                jsonGenerator.writeEnd();
+
+                List<Passenger> passengers = flight.getPassengers();
+                jsonGenerator.writeStartArray("passengers");
+                passengers.forEach(passenger -> {
+                    jsonGenerator.writeStartObject();
+                    jsonGenerator.write("name", passenger.getName());
+                    jsonGenerator.write("age", passenger.getAge());
+                    jsonGenerator.write("passport", passenger.getPassport());
+                    jsonGenerator.write("seat", passenger.getSeat());
+
+                    jsonGenerator.writeStartObject("baggage");
+                    jsonGenerator.write("checkedIn", passenger.getBaggage().isCheckedIn());
+                    jsonGenerator.write("weightKg", passenger.getBaggage().getWeightKg());
+                    jsonGenerator.writeEnd();
+
+                    jsonGenerator.writeEnd();
+                });
+                jsonGenerator.writeEnd();
+
+
+                jsonGenerator.writeEnd();
+            });
+
+            jsonGenerator.writeEnd();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+
+
 
 }
 
