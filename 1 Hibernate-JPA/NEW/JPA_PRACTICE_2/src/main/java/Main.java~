@@ -1,0 +1,28 @@
+import daos.DepartmentDAO;
+import daos.ProjectDAO;
+import daos.StaffDAO;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.Persistence;
+
+/**
+ * Admin 4/30/2025
+ **/
+public class Main {
+    public static void main(String[] args) {
+//        StaffDAO.findStaffByNameKeyword("Charlyn").forEach(System.out::println);
+//        ProjectDAO.findProjectByMinBudget(40000).forEach(System.out::println);
+//        StaffDAO.findStaffByAgeBetween(20, 30).forEach(System.out::println);
+//        ProjectDAO.findProjectHasStaffs().forEach(System.out::println);
+//        DepartmentDAO.findDepartmentHasMoreThan3Staffs().forEach(System.out::println);
+//        DepartmentDAO.countStaffByDepartment().forEach((key, value) -> System.out.println(key.getName() + ": " + value));
+//        StaffDAO.findStaffWithoutProject().forEach(System.out::println);
+//        StaffDAO.findStaffByPhone("(274) 235-3524").forEach(System.out::println);
+//        ProjectDAO.findProjectsHasMoreStaffThanAverage().forEach(System.out::println);
+//        StaffDAO.findStaffInProjectWithMaxBudget().forEach(System.out::println);
+//        DepartmentDAO.findDepartmentHasMoreStaffThanDepartment("D1").forEach(System.out::println);.
+//        StaffDAO.findStaffNotJoinLowBudgetProject(50000).forEach(System.out::println);
+        DepartmentDAO.findDepartmentWithAvgAgeGreaterThan(30).forEach(System.out::println);
+    }
+
+
+}

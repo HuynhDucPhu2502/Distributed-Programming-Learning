@@ -1,0 +1,36 @@
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.Persistence;
+import models.Group;
+import models.User;
+
+
+/**
+ * Admin 5/2/2025
+ **/
+public class Main {
+    public static void main(String[] args) {
+        EntityManager em = Persistence.createEntityManagerFactory("mariadb")
+                .createEntityManager();
+
+        // Tạo user
+        User user = new User();
+        user.setUsername("HuynhDucPhu");
+        user.setPassword("huynhducphu@test123");
+        user.setEmail("HuynhDucPhu2502@gmail.com");
+
+        // Tạo group
+        Group group = new Group();
+        group.setName("Software Engineer");
+
+        // Từ user thêm vào group
+//        user.getGroups().add(group);
+
+        // Từ group thêm vào user
+        group.getUsers().add(user);
+
+        em.getTransaction().begin();
+        em.persist(group);
+        em.getTransaction().commit();
+
+    }
+}
