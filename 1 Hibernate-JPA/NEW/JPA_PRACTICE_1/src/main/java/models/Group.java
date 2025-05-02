@@ -1,0 +1,38 @@
+package models;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.util.LinkedHashSet;
+import java.util.Set;
+
+/**
+ * Admin 4/29/2025
+ **/
+@Entity
+@Table(name = "groups")
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+public class Group {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "group_id")
+    @EqualsAndHashCode.Include
+    private int groupId;
+
+    @Column(columnDefinition = "VARCHAR(45)", nullable = false)
+    private String name;
+
+    @ManyToMany
+    @JoinTable(
+            name = "users_groups",
+            joinColumns = @JoinColumn(name = "group_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    @ToString.Exclude
+    private Set<User> users = new LinkedHashSet<>();
+
+}
