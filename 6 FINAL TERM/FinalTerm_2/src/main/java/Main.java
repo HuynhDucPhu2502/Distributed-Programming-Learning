@@ -1,0 +1,12 @@
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.Persistence;
+
+/**
+ * Admin 5/3/2025
+ **/
+public class Main {
+    public static void main(String[] args) {
+        EntityManager em = Persistence
+                .createEntityManagerFactory("mariadb").createEntityManager();
+    }
+}
