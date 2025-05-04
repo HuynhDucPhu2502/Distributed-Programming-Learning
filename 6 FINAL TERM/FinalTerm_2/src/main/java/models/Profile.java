@@ -1,6 +1,7 @@
 package models;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 /**
  *  Admin 5/3/2025
@@ -8,9 +9,14 @@ import jakarta.persistence.*;
 **/
 @Entity
 @Table(name = "profiles")
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Profile {
 
     @Id
+    @EqualsAndHashCode.Include
     private long id;
 
     private String avatar;
@@ -21,6 +27,7 @@ public class Profile {
     @OneToOne
     @JoinColumn(name = "staff_id")
     @MapsId
+    @ToString.Exclude
     private Staff staff;
 
 

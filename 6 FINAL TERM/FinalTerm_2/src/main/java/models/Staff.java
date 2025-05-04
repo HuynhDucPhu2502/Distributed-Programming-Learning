@@ -1,6 +1,7 @@
 package models;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -11,10 +12,15 @@ import java.util.Set;
 **/
 @Entity
 @Table(name = "staffs")
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Staff {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "staff_id")
+    @EqualsAndHashCode.Include
     private long id;
 
     @Column(nullable = false)
@@ -23,7 +29,7 @@ public class Staff {
     @Column(name = "staff_name", columnDefinition = "NVARCHAR(100)", nullable = false)
     private String name;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @JoinTable(
             name = "phones",
             joinColumns = @JoinColumn(name = "staff_id"),
@@ -36,13 +42,16 @@ public class Staff {
     private String references;
 
     @OneToOne(mappedBy = "staff")
+    @ToString.Exclude
     private Profile profile;
 
     @ManyToOne
     @JoinColumn(name = "dept_id")
+    @ToString.Exclude
     private Department department;
 
     @ManyToMany(mappedBy = "staffs")
+    @ToString.Exclude
     private Set<Project> projects = new HashSet<>();
 
 
