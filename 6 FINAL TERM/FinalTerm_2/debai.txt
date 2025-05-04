@@ -1,0 +1,40 @@
+1.Tìm Staff có tên giống với keyword nhất
+List<Staff> findStaffByNameKeyword(String keyword)
+
+2. Tìm Project lớn hơn Budget truyền vào
+List<Project> findProjectByMinBudget(double minBudget)
+
+3. Tìm Staff có tuổi nằm trong từ và đến
+List<Staff> findStaffByAgeBetween(int minAge, int maxAge)
+
+4. Tìm Project mà có Staff 
+List<Project> findProjectHasStaffs()
+
+5. Tìm phòng ban có hơn 3 Staff
+List<Department> findDepartmentHasMoreThan3Staffs()
+
+6. Tìm số nhân viên theo phòng ban
+Map<Department, Long> countStaffByDepartment()
+
+7. Tìm Staff không có proj
+List<Staff> findStaffWithoutProject()
+
+8. Tìm Staff theo phoneNumber
+List<Staff> findStaffByPhone(String phone)
+
+
+9. Project có số nhân viên > trung bình số nhân viên tất cả project
+List<Project> findProjectsHasMoreStaffThanAverage()
+
+10. Staff tham gia project có ngân sách lớn nhất
+List<Staff> findStaffInProjectWithMaxBudget()
+
+11. Department có số staff >= số staff của 1 phòng ban bất kỳ có ID
+List<Department> findDepartmentHasMoreStaffThanDepartment(String deptId)
+
+12. Staff không tham gia bất kỳ project nào có ngân sách < xxx
+List<Staff> findStaffNotJoinLowBudgetProject(double budget)
+
+13. Department có tuổi trung bình staff > xxx
+List<Department> findDepartmentWithAvgAgeGreaterThan(int age)
+

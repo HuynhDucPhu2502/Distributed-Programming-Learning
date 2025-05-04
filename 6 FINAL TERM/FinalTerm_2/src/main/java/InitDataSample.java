@@ -1,0 +1,88 @@
+/**
+ * Admin 4/30/2025
+ **/
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
+import models.Department;
+import models.Profile;
+import models.Project;
+import models.Staff;
+import net.datafaker.Faker;
+
+import java.util.*;
+
+public class InitDataSample {
+    public static void main(String[] args) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("mariadb");
+        EntityManager em = emf.createEntityManager();
+
+        Faker faker = new Faker(new Locale("en"));
+        Random random = new Random();
+
+        em.getTransaction().begin();
+
+        // ===== Tạo phòng ban =====
+        List<Department> departments = new ArrayList<>();
+        for (int i = 1; i <= 8; i++) {
+            Department dept = new Department();
+            dept.setId("D" + i);
+            dept.setName(faker.company().name());
+            dept.setLocation(faker.address().city());
+            em.persist(dept);
+            departments.add(dept);
+        }
+
+        // ===== Tạo nhân viên (mỗi phòng ban 0–8 nhân viên) =====
+        List<Staff> allStaffs = new ArrayList<>();
+        for (Department dept : departments) {
+            int numStaff = random.nextInt(9); // 0–8 nhân viên
+            for (int i = 0; i < numStaff; i++) {
+                Staff staff = new Staff();
+                staff.setName(faker.name().fullName());
+                staff.setAge(20 + random.nextInt(30));
+                staff.setDepartment(dept);
+                staff.setReferences(faker.book().title());
+
+                Set<String> phones = new HashSet<>();
+                int numPhones = 1 + random.nextInt(2);
+                for (int j = 0; j < numPhones; j++) {
+                    phones.add(faker.phoneNumber().cellPhone());
+                }
+                staff.setPhoneNumbers(phones);
+
+                em.persist(staff);
+                allStaffs.add(staff);
+
+                // Profile tương ứng (1-1)
+                Profile profile = new Profile();
+                profile.setStaff(staff);
+                profile.setAvatar(faker.internet().image());
+                profile.setDescription(faker.lorem().paragraph());
+                em.persist(profile);
+            }
+        }
+
+        // ===== Tạo 10 project, mỗi project 0–7 nhân viên ngẫu nhiên =====
+        for (int i = 1; i <= 10; i++) {
+            Project project = new Project();
+            project.setId("P" + i);
+            project.setName(faker.app().name());
+            project.setBudget(10_000 + random.nextInt(50_000));
+
+            Set<Staff> selectedStaff = new HashSet<>();
+            Collections.shuffle(allStaffs);
+            int count = Math.min(random.nextInt(8), allStaffs.size()); // max 7
+            for (int j = 0; j < count; j++) {
+                selectedStaff.add(allStaffs.get(j));
+            }
+            project.setStaffs(selectedStaff);
+            em.persist(project);
+        }
+
+        em.getTransaction().commit();
+        em.close();
+        emf.close();
+    }
+}
