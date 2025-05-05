@@ -1,0 +1,35 @@
+import service.DepartmentService;
+import service.StaffService;
+import service.implement.DepartmentServiceImp;
+import service.implement.StaffServiceImp;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import java.rmi.registry.LocateRegistry;
+
+/**
+ *  Admin 5/5/2025
+ *  
+**/public class Server {
+
+
+    public static void main(String[] args) throws Exception {
+
+        Context context = new InitialContext();
+
+        LocateRegistry.createRegistry(8080);
+
+        // tạo các lớp service
+        StaffService staffService = new StaffServiceImp();
+        DepartmentService departmentService = new DepartmentServiceImp();
+
+        context.bind("rmi://Admin-PC:8080/staffService", staffService);
+        context.bind("rmi://Admin-PC:8080/departmentService", departmentService);
+
+
+
+
+
+
+    }
+}

@@ -1,0 +1,27 @@
+package service.implement;
+
+import daos.StaffDAO;
+import models.Staff;
+
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+import java.util.List;
+
+/**
+ * Admin 5/5/2025
+ **/
+public class StaffServiceImplement extends UnicastRemoteObject {
+    private final StaffDAO staffDAO;
+
+    public StaffServiceImplement() throws RemoteException {
+        staffDAO = new StaffDAO();
+    }
+
+    public List<Staff> findStaffByAgeBetween(int minAge, int maxAge) throws RemoteException {
+        return staffDAO.findStaffByAgeBetween(minAge, maxAge)
+    }
+
+    public List<Staff> findStaffByPhone(String phone) throws RemoteException {
+        return staffDAO.findStaffByPhone(phone);
+    }
+}

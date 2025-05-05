@@ -1,0 +1,14 @@
+Bước 1: implements Serializable tất cả Model Class
+
+Bước 2: Tạo package service/implement
+
+Bước 3: Tạo ra các class implement
+	+ tên class: XXXServiceImplement
+	+ extends UnicastRemoteObject
+	+ gắn lớp dao tương ứng
+	+ Tạo construct extends RemoteObjectException
+	+ viết các phương thức (các phương thức có throws RemoteObjectException)
+
+Bước 4: Với từng class implement, refactor => chọn extract interface
+
+Bước 5: thực hiện làm Client Server
