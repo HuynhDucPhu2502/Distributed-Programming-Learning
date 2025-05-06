@@ -1,0 +1,17 @@
+import service.DepartmentService;
+
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+
+/**
+ * Admin 5/5/2025
+ **/
+public class Client {
+    public static void main(String[] args) throws Exception {
+        Registry registry = LocateRegistry.getRegistry("Admin-PC", 8080);
+
+        DepartmentService departmentService = (DepartmentService) registry.lookup("departmentService");
+
+
+    }
+}

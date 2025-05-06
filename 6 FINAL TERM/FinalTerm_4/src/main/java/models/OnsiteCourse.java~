@@ -1,0 +1,19 @@
+package models;
+
+import jakarta.persistence.Entity;
+
+import java.time.LocalDateTime;
+
+/**
+ *  Admin 5/6/2025
+ *  
+**/
+@Entity
+public class OnsiteCourse extends Course {
+
+    private String days;
+
+    private String location;
+
+    private LocalDateTime time;
+}

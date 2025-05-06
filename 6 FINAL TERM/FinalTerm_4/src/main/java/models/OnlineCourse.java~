@@ -1,0 +1,11 @@
+package models;
+
+/**
+ *  Admin 5/6/2025
+ *  
+**/
+public class OnlineCourse extends Course {
+
+    private String url;
+
+}

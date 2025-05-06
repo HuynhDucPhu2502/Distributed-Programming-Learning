@@ -11,7 +11,7 @@
             <property name="jakarta.persistence.jdbc.driver"
                       value="org.mariadb.jdbc.Driver"/>
             <property name="jakarta.persistence.jdbc.url"
-                      value="jdbc:mariadb://localhost:3307/FinalTerm_4_DB?allowPublicKeyRetrieval=true"/>
+                      value="jdbc:mariadb://localhost:3307/FinalTerm_2_DB?allowPublicKeyRetrieval=true"/>
             <property name="jakarta.persistence.jdbc.dialect"
                       value="org.hibernate.dialect.MariaDBDialect"/>
 

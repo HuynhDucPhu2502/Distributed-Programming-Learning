@@ -1,0 +1,13 @@
+package models;
+
+import jakarta.persistence.Entity;
+
+/**
+ * Admin 5/6/2025
+ **/
+@Entity
+public class OnlineCourse extends Course {
+
+    private String url;
+
+}

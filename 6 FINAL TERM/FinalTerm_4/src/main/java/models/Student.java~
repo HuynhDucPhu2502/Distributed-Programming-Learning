@@ -1,0 +1,23 @@
+package models;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
+
+import java.time.LocalDateTime;
+import java.util.Set;
+
+/**
+ *  Admin 5/6/2025
+ *  
+**/
+@Entity
+public class Student extends Person {
+
+    @Column(name = "EnrollmentDate")
+    private LocalDateTime enrollmentDate;
+
+    @OneToMany(mappedBy = "Student")
+    private Set<StudentGrade> studentGrades;
+
+}

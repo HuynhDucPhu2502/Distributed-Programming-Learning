@@ -1,0 +1,36 @@
+package models;
+
+import jakarta.persistence.*;
+
+import java.time.LocalDateTime;
+import java.util.Set;
+
+/**
+ * Admin 5/6/2025
+ **/
+@Entity
+public class Department {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "DepartmentID")
+    private int id;
+
+    @Column(name = "Administrator")
+    private int administrator;
+
+    @Column(name = "Budget")
+    private double budget;
+
+    @Column(name = "Name")
+    private String name;
+
+    @Column(name = "StartDate")
+    private LocalDateTime startDate;
+
+    @OneToMany(mappedBy = "department")
+    private Set<Course> courses;
+
+
+
+}
