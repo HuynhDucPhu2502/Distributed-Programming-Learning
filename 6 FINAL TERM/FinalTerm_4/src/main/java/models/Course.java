@@ -1,6 +1,7 @@
 package models;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -11,11 +12,16 @@ import java.util.Set;
 **/
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public abstract class Course {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "CourseID")
+    @EqualsAndHashCode.Include
     protected int id;
 
     @Column(name = "Credits")
@@ -26,18 +32,21 @@ public abstract class Course {
 
     @ManyToOne
     @JoinColumn(name = "DepartmentID")
+    @ToString.Exclude
     private Department department;
 
     @ManyToMany
     @JoinTable(
             name = "CourseInstructor",
             joinColumns = @JoinColumn(name = "CourseID"),
-            inverseJoinColumns = @JoinColumn(name = "InstructorID")
+            inverseJoinColumns = @JoinColumn(name = "PersonID")
     )
+    @ToString.Exclude
     private Set<Instructor> instructors = new HashSet<>();
 
 
     @OneToMany(mappedBy = "course")
+    @ToString.Exclude
     private Set<StudentGrade> studentGrades;
 
 

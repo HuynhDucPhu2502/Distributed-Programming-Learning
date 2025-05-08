@@ -1,6 +1,10 @@
 package models;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -11,11 +15,16 @@ import java.util.Set;
  *  
 **/
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Department {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "DepartmentID")
+    @EqualsAndHashCode.Include
     private int id;
 
     @Column(name = "Administrator")
@@ -30,5 +39,6 @@ public class Department {
     @Column(name = "StartDate")
     private LocalDateTime startDate;
 
-    private Set<Course> courses = new HashSet<>(;)
+    @OneToMany(mappedBy = "department")
+    private Set<Course> courses = new HashSet<>();
 }

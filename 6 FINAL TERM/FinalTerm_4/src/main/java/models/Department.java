@@ -1,6 +1,7 @@
 package models;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -11,11 +12,16 @@ import java.util.Set;
  *  
 **/
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Department {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "DepartmentID")
+    @EqualsAndHashCode.Include
     private int id;
 
     @Column(name = "Administrator")
@@ -31,5 +37,6 @@ public class Department {
     private LocalDateTime startDate;
 
     @OneToMany(mappedBy = "department")
+    @ToString.Exclude
     private Set<Course> courses = new HashSet<>();
 }

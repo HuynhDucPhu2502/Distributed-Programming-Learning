@@ -1,6 +1,7 @@
 package models;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -10,10 +11,14 @@ import java.time.LocalDateTime;
  *  
 **/
 @Entity
-
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class OfficeAssignment {
 
     @Id
+    @EqualsAndHashCode.Include
     private int id;
 
     @Column(name = "Location")
@@ -29,6 +34,7 @@ public class OfficeAssignment {
     @OneToOne
     @JoinColumn(name = "InstructorID")
     @MapsId
+    @ToString.Exclude
     private Instructor instructor;
 
 
