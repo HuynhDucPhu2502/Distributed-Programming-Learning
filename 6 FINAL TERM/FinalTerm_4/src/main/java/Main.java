@@ -1,15 +1,21 @@
+import daos.CourseDAO;
+import daos.DeparmentDAO;
+import daos.StudentDAO;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Persistence;
 import models.Instructor;
 import models.Student;
+import utils.JPAUtil;
+
+import java.time.LocalDateTime;
 
 /**
  * Admin 5/6/2025
  **/
 public class Main {
     public static void main(String[] args) {
-        EntityManager em = Persistence.createEntityManagerFactory("mariadb")
-                .createEntityManager();
+//        EntityManager em = Persistence.createEntityManagerFactory("mariadb")
+//                .createEntityManager();
 
 //        Student student = new Student();
 //        student.setFirstName("Nguyễn Sinh Viên");
@@ -21,6 +27,39 @@ public class Main {
 //        em.persist(student);
 //        em.persist(instructor);
 //        em.getTransaction().commit();
+
+        EntityManager em = JPAUtil.getEntityManager();
+
+        CourseDAO courseDAO = new CourseDAO();
+//        courseDAO.findCourseByCreditsBetween(2, 3).forEach(System.out::println);
+//        courseDAO.findCourseByDepartmentNameContaining("math").forEach(System.out::println);
+//        courseDAO.findOnlineCourseByUrlContainingAndCreditsGreaterThanEqual("tri", 4)
+//                .forEach(System.out::println);
+//        courseDAO.countStudentsByCourse().forEach((k, v) -> System.out.println(k.getTitle() + ": " + v));
+        courseDAO.findOnsiteCourseByDaysContaining("WHF").forEach(System.out::println);
+
+        DeparmentDAO deparmentDAO = new DeparmentDAO();
+//        deparmentDAO.countCourseByDepartment()
+//                .forEach((k, v) -> System.out.println(k.getName() + ": " + v));
+//        deparmentDAO.findDepartmentWithMaxBudget().forEach(System.out::println);
+
+
+        StudentDAO studentDAO = new StudentDAO();
+//        studentDAO.findStudentByEnrollmentDateBetween(
+//                LocalDateTime.of(2000, 9, 1, 0, 0),
+//                LocalDateTime.of(2002, 9, 1, 0, 0)
+//        ).forEach(System.out::println);
+
+
+
+
+
+
+
+
+
+        JPAUtil.close();
+
 
     }
 }

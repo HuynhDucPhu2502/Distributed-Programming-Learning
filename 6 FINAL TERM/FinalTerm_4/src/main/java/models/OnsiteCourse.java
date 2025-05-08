@@ -2,10 +2,7 @@ package models;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -19,6 +16,7 @@ import java.time.LocalTime;
 @NoArgsConstructor
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString(callSuper = true)
 public class OnsiteCourse extends Course {
 
     @Column(name = "Days")

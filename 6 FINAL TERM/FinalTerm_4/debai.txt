@@ -1,0 +1,26 @@
+1. Tìm khóa học (`Course`) có số tín chỉ nằm giữa `minCredits` và `maxCredits`
+List<Course> findCourseByCreditsBetween(int minCredits, int maxCredits)
+
+2. Tìm khóa học (`Course`) thuộc khoa có tên chứa `deptName`
+List<Course> findCourseByDepartmentNameContaining(String deptName)
+
+3. Tìm khóa học trực tuyến (`OnlineCourse`) có URL chứa `urlKeyword` và tín chỉ ≥ `minCredits`
+List<OnlineCourse> findOnlineCourseByUrlContainingAndCreditsGreaterThanEqual(String urlKeyword, int minCredits)
+
+4. Thống kê số khóa học theo khoa
+Map<Department, Long> countCourseByDepartment()
+
+5. Tìm sinh viên (`Student`) có ngày nhập học nằm giữa `startDate` và `endDate`
+List<Student> findStudentByEnrollmentDateBetween(LocalDateTime startDate, LocalDateTime endDate)
+
+6. Tìm giảng viên (`Instructor`) có thời điểm phân công văn phòng trước `timestamp`
+List<Instructor> findInstructorByOfficeAssignmentTimestampBefore(LocalDateTime timestamp)
+
+7. Thống kê số sinh viên theo khóa học
+Map<Course, Long> countStudentsByCourse()
+
+8. Tìm phòng ban (`Department`) có ngân sách lớn nhất
+List<Department> findDepartmentWithMaxBudget()
+
+9. Tìm khóa học tại chỗ (`OnsiteCourse`) có ngày học (`days`) chứa `dayKeyword`
+List<OnsiteCourse> findOnsiteCourseByDaysContaining(String dayKeyword)

@@ -17,6 +17,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = true)
+@ToString(callSuper = true)
 public class Student extends Person {
 
     @Column(name = "EnrollmentDate")
