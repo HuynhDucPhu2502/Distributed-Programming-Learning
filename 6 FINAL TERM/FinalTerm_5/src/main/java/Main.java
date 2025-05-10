@@ -1,0 +1,34 @@
+import dao.QuestionDAO;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.Persistence;
+import model.Question;
+import model.enums.Level;
+import util.JPAUtils;
+
+/**
+ * Admin 5/10/2025
+ **/
+public class Main {
+    public static void main(String[] args) {
+//        EntityManager entityManager = Persistence.createEntityManagerFactory("mariadb").createEntityManager();
+
+        JPAUtils.getEntityManager();
+
+        QuestionDAO questionDAO = new QuestionDAO();
+//        questionDAO.listQuestionsByLevelAndCategory("mo", Level.EASY)
+//                .forEach(System.out::println);
+//        questionDAO.countQuestionsByLevelInQuiz("QZ108")
+//                .forEach((k, v) -> System.out.println(k + ": " + v));
+
+//        Question question = new Question();
+//        question.setId("Test");
+//        question.setQuestionText("Huynh Duc Phu");
+//        System.out.println(questionDAO.addQuestionToCategory(question, "C101"));
+
+
+
+
+
+
+    }
+}

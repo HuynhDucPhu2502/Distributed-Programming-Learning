@@ -1,0 +1,25 @@
+import service.QuestionService;
+import service.impl.QuestionServiceImpl;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import java.rmi.registry.LocateRegistry;
+
+/**
+ * Admin 5/10/2025
+ **/
+public class Server {
+    public static void main(String[] args) throws Exception {
+
+        // Tạo và mở port Server
+        Context context = new InitialContext();
+        LocateRegistry.createRegistry(8080);    
+        // Tạo service
+        QuestionService questionService = new QuestionServiceImpl();
+
+        // Bind service vào server
+        context.bind("rmi://Admin-PC:8080/questionService", questionService);
+
+        System.out.println("SERVER STARTED");
+    }
+}
