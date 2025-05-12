@@ -1,0 +1,126 @@
+package iuh.fit;
+
+import model.Question;
+import model.enums.Level;
+import model.enums.Type;
+import service.QuestionService;
+import service.QuizService;
+
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.util.Scanner;
+
+/**
+ * Admin 5/10/2025
+ **/
+public class Client {
+    public static void main(String[] args) throws Exception {
+
+        Registry registry = LocateRegistry.getRegistry(8080);
+
+        QuizService quizService = (QuizService) registry.lookup("quizService");
+        QuestionService questionService = (QuestionService) registry.lookup("questionService");
+
+//        quizService.countQuestionsByLevelInQuiz("QZ108")
+//                .forEach((k, v) -> System.out.println(k + ": " + v));
+
+
+        try (Scanner scanner = new Scanner(System.in)) {
+            while (true) {
+                System.out.println("===========================");
+                System.out.println("1. Liệt kê danh sách các câu hỏi dựa trên độ khó của câu hỏi và thuộc về một chủ đề nào đó");
+                System.out.println("2. Thống kê số lượng câu hỏi theo mức độ khó của câu hỏi ");
+                System.out.println("3. Thêm một câu hỏi (question) mới vào một chủ đề (category) cụ thể");
+                System.out.println("4. Thoát");
+                System.out.print("Chọn công việc của bạn: ");
+                int choice = Integer.parseInt(scanner.nextLine());
+
+                switch (choice) {
+                    case 1 -> {
+                        System.out.print("Nhập tên Category: ");
+                        String categoryName = scanner.nextLine();
+
+                        System.out.println("1. EASY, 2. MEDIUM, 3. HARD (insert number)");
+                        System.out.print("Level: ");
+                        Level level = null;
+                        switch (Integer.parseInt(scanner.nextLine()))  {
+                            case 1 -> level = Level.EASY;
+                            case 2 -> level = Level.MEDIUM;
+                            case 3 -> level = Level.HARD;
+                            default -> {
+                                System.out.println("Level không phù hợp");
+                            }
+                        }
+
+                        if (level != null) {
+                            System.out.println("\n\n");
+                            questionService.listQuestionsByLevelAndCategory(categoryName, level)
+                                    .forEach(System.out::println);
+                            System.out.println("\n\n");
+                        }
+
+
+                    }
+
+                    case 2 -> {
+
+                        System.out.print("Nhập quiz id: ");
+                        String quizID = scanner.nextLine();
+
+                        quizService.countQuestionsByLevelInQuiz(quizID)
+                                .forEach((k , v) -> System.out.println(k + ": " + v));
+                    }
+
+                    case 3 -> {
+
+                        Question question = new Question();
+
+                        System.out.print("Nhập mã: ");
+                        String id = scanner.nextLine();
+
+                        System.out.println("1. EASY, 2. MEDIUM, 3. HARD (điền số)");
+                        System.out.print("Level: ");
+                        Level level = null;
+                        switch (Integer.parseInt(scanner.nextLine()))  {
+                            case 1 -> level = Level.EASY;
+                            case 2 -> level = Level.MEDIUM;
+                            case 3 -> level = Level.HARD;
+                        }
+
+                        System.out.println("1. MULTIPLE_CHOICE, 2. TRUE_FALSE, 3. FILL_IN_THE_BLANK");
+                        System.out.println("4. MATCHING, 5. ESSAY (điền số)");
+                        System.out.print("Type: ");
+                        Type type = null;
+                        switch (Integer.parseInt(scanner.nextLine()))  {
+                            case 1 -> type = Type.MULTIPLE_CHOICE;
+                            case 2 -> type = Type.TRUE_FALSE;
+                            case 3 -> type = Type.FILL_IN_THE_BLANK;
+                            case 4 -> type = Type.MATCHING;
+                            case 5 -> type = Type.ESSAY;
+                        }
+
+                        System.out.print("Nhập nội dung: ");
+                        String questionText = scanner.nextLine();
+
+                        System.out.print("Nhập mã chủ đề: ");
+                        String categoryID = scanner.nextLine();
+
+
+                        question.setId(id);
+                        question.setLevel(level);
+                        question.setType(type);
+                        question.setQuestionText(questionText);
+
+                        System.out.println(questionService.addQuestionToCategory(question, categoryID));;
+                    }
+
+                    case 4 -> System.exit(0);
+
+                }
+
+            }
+        }
+
+
+    }
+}

@@ -1,0 +1,60 @@
+package dao;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
+import model.Category;
+import model.Question;
+import model.enums.Level;
+import util.JPAUtils;
+
+import java.util.List;
+
+/**
+ * Admin 5/10/2025
+ **/
+public class QuestionDAO {
+
+    public List<Question> listQuestionsByLevelAndCategory(String categoryName, Level questionLevel) {
+
+        try (EntityManager em = JPAUtils.getEntityManager()) {
+            String jpql =
+                    """
+                    SELECT q 
+                    FROM Question q 
+                    JOIN q.category c 
+                    WHERE c.name LIKE CONCAT("%", :categoryName, "%")
+                        AND q.level = :questionLevel
+                    """;
+
+            TypedQuery<Question> query = em.createQuery(jpql, Question.class);
+            query.setParameter("categoryName", categoryName);
+            query.setParameter("questionLevel", questionLevel);
+
+
+            return query.getResultList();
+        }
+
+    }
+
+    public Question addQuestionToCategory(Question question, String categoryId) {
+
+        try (EntityManager em = JPAUtils.getEntityManager()) {
+            em.getTransaction().begin();
+
+            Category category = em.find(Category.class, categoryId);
+            if (category == null) return null;
+
+            question.setCategory(category);
+
+            em.persist(question);
+
+            em.getTransaction().commit();
+        }
+
+        return question;
+
+    }
+
+
+
+}
