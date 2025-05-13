@@ -1,0 +1,108 @@
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
+import models.*;
+import net.datafaker.Faker;
+
+import java.util.*;
+
+/**
+ * Admin 5/13/2025
+ **/
+public class InitDataSample {
+    public static void main(String[] args) {
+        Faker faker = new Faker(new Random(42));
+
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("mariadb");
+        EntityManager em = emf.createEntityManager();
+
+        em.getTransaction().begin();
+
+        // 1. Publishers
+        List<Publisher> pubs = new ArrayList<>();
+        for (int i = 1; i <= 5; i++) {
+            Publisher p = new Publisher();
+            p.setId("PUB" + i);
+            p.setName(faker.book().publisher());
+            p.setAddress(faker.address().fullAddress());
+            p.setEmail(faker.internet().emailAddress());
+            p.setPhone(faker.phoneNumber().phoneNumber());
+            em.persist(p);
+            pubs.add(p);
+        }
+
+        // 2. Persons
+        List<Person> people = new ArrayList<>();
+        for (int i = 0; i < 20; i++) {
+            Person u = new Person();
+            u.setFirstName(faker.name().firstName());
+            u.setLastName(faker.name().lastName());
+            u.setEmail(faker.internet().emailAddress());
+            u.setProfessionalTitle(faker.job().title());
+            em.persist(u);
+            people.add(u);
+        }
+
+        // 3. Books + authors
+        List<Book> books = new ArrayList<>();
+        for (int i = 0; i < 30; i++) {
+            Book b = new Book();
+            b.setISBN(faker.code().isbn10());
+            b.setName(faker.book().title());
+            b.setPublishYear(faker.number().numberBetween(1950, 2025));
+            b.setNumberOfPages(faker.number().numberBetween(50, 1000));
+            b.setPrice(faker.number().randomDouble(2, 10, 200));
+            b.setPublisher(pubs.get(faker.number().numberBetween(0, pubs.size())));
+            // authors
+            Set<String> auth = new HashSet<>();
+            int cnt = faker.number().numberBetween(1, 4);
+            while (auth.size() < cnt) auth.add(faker.book().author());
+            b.setAuthors(auth);
+
+            em.persist(b);
+            books.add(b);
+        }
+
+        // 4. BookTranslations (JOINED inheritance) dùng setter
+        String[] langs = {"vi","en","fr","de"};
+        for (Book b : books) {
+            int tcount = faker.number().numberBetween(0, 3);
+            List<String> langList = Arrays.asList(langs);
+            Collections.shuffle(langList, faker.random());
+            for (int j = 0; j < tcount; j++) {
+                BookTranslation bt = new BookTranslation();
+                // inherited từ Book
+                bt.setISBN(          b.getISBN());
+                bt.setName(          b.getName());
+                bt.setPublishYear(   b.getPublishYear());
+                bt.setNumberOfPages( b.getNumberOfPages());
+                bt.setPrice(         b.getPrice());
+                bt.setPublisher(     b.getPublisher());
+                bt.setAuthors(       new HashSet<>(b.getAuthors()));
+                // riêng của translation
+                bt.setTranslateName( faker.book().title());
+                bt.setLanguage(      langList.get(j));
+
+                em.persist(bt);
+            }
+        }
+
+        // 5. Reviews
+        for (Book b : books) {
+            int rcount = faker.number().numberBetween(0, 5);
+            for (int j = 0; j < rcount; j++) {
+                Person u = people.get(faker.number().numberBetween(0, people.size()));
+                Review rv = new Review();
+                rv.setBook(b);
+                rv.setPerson(u);
+                rv.setRating(faker.number().numberBetween(1,5));
+                rv.setComment(faker.lorem().sentence());
+                em.persist(rv);
+            }
+        }
+
+        em.getTransaction().commit();
+        em.close();
+        emf.close();
+    }
+}

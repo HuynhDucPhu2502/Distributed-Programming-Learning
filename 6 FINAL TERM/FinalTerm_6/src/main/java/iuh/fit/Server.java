@@ -1,0 +1,29 @@
+package iuh.fit;
+
+import iuh.fit.services.BookService;
+import iuh.fit.services.impl.BookServiceImpl;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import java.rmi.registry.LocateRegistry;
+
+/**
+ * Admin 5/13/2025
+ **/
+public class Server {
+    public static void main(String[] args) throws Exception {
+
+        // Tạo server, mở port
+        Context context = new InitialContext();
+        LocateRegistry.createRegistry(8080);
+
+        // Tạo service
+        BookService bookService = new BookServiceImpl();
+
+        // Bind Service lên server
+        context.bind("rmi://Admin-PC:8080/bookService", bookService);
+
+        System.out.println("iuh.fit.Server has started");
+
+    }
+}

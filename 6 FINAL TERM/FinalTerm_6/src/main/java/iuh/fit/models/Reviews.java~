@@ -1,0 +1,15 @@
+package models;
+
+
+/**
+ * Admin 5/13/2025
+ **/
+public class Reviews {
+
+    private int rating;
+
+    private String comment;
+    
+
+
+}

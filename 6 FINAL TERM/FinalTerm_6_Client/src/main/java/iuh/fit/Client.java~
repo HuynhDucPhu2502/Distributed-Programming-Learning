@@ -1,0 +1,62 @@
+package iuh.fit;
+
+import iuh.fit.services.BookService;
+
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.util.Scanner;
+
+/**
+ * Admin 5/13/2025
+ **/
+public class Client {
+    public static void main(String[] args) throws Exception {
+
+        Registry registry = LocateRegistry.getRegistry("Admin-PC", 8080);
+
+        BookService bookService = (BookService) registry.lookup("bookService");
+
+//        bookService.listRatedBooks("Dennis M. Ritchie", 4).forEach(System.out::println);
+
+        try (Scanner sc = new Scanner(System.in)) {
+            while (true) {
+                System.out.println("==================================");
+                System.out.println("1. Liệt kê danh sách các cuốn sách theo tác giả và có đánh giá trên bao nhiêu");
+                System.out.println("2. Thống kê số cuốn sách được dịch sang ngôn ngữ khác của từng tác giả");
+                System.out.println("3. Cập nhật thêm một lượt đánh giá cho một cuốn sách");
+                System.out.println("==================================");
+                System.out.print("Nhập lựa chọn: ");
+                int choice = Integer.parseInt(sc.nextLine());
+
+                switch (choice) {
+                    case 1 -> {
+                        System.out.print("Nhập tác giả: ");
+                        String author = sc.nextLine();
+                        System.out.print("Nhập đánh giá: ");
+                        int rating = Integer.parseInt(sc.nextLine());
+                        bookService.listRatedBooks(author, rating).forEach(System.out::println);
+                    }
+                    case 2 -> {
+                        bookService
+                                .countBooksByAuthor()
+                                .forEach((k, v) -> System.out.println(k + ": " + v));
+                    }
+                    case 3 -> {
+                        System.out.print("Nhập isbn: ");
+                        String book = sc.nextLine();
+                        System.out.print("Nhập tên người đọc: ");
+                        String readerID = sc.nextLine();
+                        System.out.println("Nhập điểm: ");
+                        int rating = Integer.parseInt(sc.nextLine());
+                        System.out.print("Nhập đánh giá: ");
+                        String comment = sc.nextLine();
+                        System.out.println(bookService.updateReviews(author, book, rating, comment));
+                    }
+                    case 4 -> System.exit(0);
+                }
+
+            }
+        }
+
+    }
+}
