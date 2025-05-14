@@ -41,8 +41,8 @@ public class Movie implements Serializable {
     @Column(name = "actor", nullable = false)
     private Set<String> actors;
 
+
     @OneToMany(mappedBy = "movie")
     @ToString.Exclude
     private Set<Show> shows;
-
 }

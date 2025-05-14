@@ -1,0 +1,10 @@
+public List<Show> listShowsByCurrentDateAndDirector(String director)
+
+public boolean updateShowDateTime(String showId, LocalDateTime newShowDateTime)
+
+public boolean addMovie(Movie movie)
+
+
+1. Liệt kê buổi chiếu phim trong ngày hiện tại theo tên đạo diễn
+2. Cập nhật ngày giờ chiếu phim cho buổi chiếu phim chưa ai đặt vé
+3. Thêm bộ phim mới

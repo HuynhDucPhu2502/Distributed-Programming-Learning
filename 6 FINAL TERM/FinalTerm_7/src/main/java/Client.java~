@@ -1,4 +1,6 @@
+import services.MovieService;
 import services.ShowService;
+
 
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -7,15 +9,14 @@ import java.rmi.registry.Registry;
  * Admin 5/14/2025
  **/
 public class Client {
-
     public static void main(String[] args) throws Exception {
 
         Registry registry = LocateRegistry.getRegistry("Admin-PC", 8080);
 
-        ShowService showService = (ShowService) registry.lookup("showService");
+        ShowService showService = (ShowService) registry.lookup("showService") ;
+        MovieService movieService = (MovieService) registry.lookup("movieService");
 
-        showService.listShowsByCurrentDateAndDirector("Roger Allers")
-                .forEach(System.out::println);
+
 
     }
 }

@@ -5,7 +5,7 @@ import lombok.*;
 import models.enums.Type;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * Admin 5/14/2025
@@ -31,17 +31,15 @@ public class Ticket implements Serializable {
     private double price;
 
     @Column(name = "booking_date")
-    private LocalDate bookingDate;
-
-    @ManyToOne
-    @JoinColumn(name = "show_id")
-    @ToString.Exclude
-    private Show show;
+    private LocalDateTime bookingDate;
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
     @ToString.Exclude
     private Customer customer;
 
-
+    @ManyToOne
+    @JoinColumn(name = "show_id")
+    @ToString.Exclude
+    private Show show;
 }

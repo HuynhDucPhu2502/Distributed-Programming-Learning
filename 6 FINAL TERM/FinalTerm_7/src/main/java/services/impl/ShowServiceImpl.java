@@ -1,7 +1,6 @@
 package services.impl;
 
 import daos.ShowDAO;
-import models.Movie;
 import models.Show;
 
 import java.rmi.RemoteException;
@@ -30,8 +29,5 @@ public class ShowServiceImpl extends UnicastRemoteObject implements services.Sho
         return showDAO.updateShowDateTime(showId, newShowDateTime);
     }
 
-    @Override
-    public boolean addMovie(Movie movie) throws RemoteException {
-        return showDAO.addMovie(movie);
-    }
+
 }

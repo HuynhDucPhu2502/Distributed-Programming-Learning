@@ -1,3 +1,4 @@
+import daos.MovieDAO;
 import daos.ShowDAO;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Persistence;
@@ -15,15 +16,16 @@ public class Main {
 //                .createEntityManager();
 
         ShowDAO showDAO = new ShowDAO();
+        MovieDAO movieDAO = new MovieDAO();
 
-//        showDAO.listShowsByCurrentDateAndDirector("Bong Joon-ho")
+//        showDAO.listShowsByCurrentDateAndDirector("Anthony Russo")
 //                .forEach(System.out::println);
 
-//        System.out.println(showDAO.updateShowDateTime("s014", LocalDateTime.now().minusDays(5)));
+//        System.out.println(showDAO.updateShowDateTime("s016", LocalDateTime.now().minusDays(5)));
 
 //        Movie movie = new Movie();
 //        movie.setId("M069");
 //        movie.setDuration(100);
-//        System.out.println(showDAO.addMovie(movie));
+//        System.out.println(movieDAO.addMovie(movie));
     }
 }
