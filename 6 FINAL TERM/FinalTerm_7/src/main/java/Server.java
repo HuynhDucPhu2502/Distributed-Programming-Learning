@@ -1,0 +1,24 @@
+import services.ShowService;
+import services.impl.ShowServiceImpl;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import java.rmi.registry.LocateRegistry;
+
+/**
+ * Admin 5/14/2025
+ **/
+public class Server {
+
+    public static void main(String[] args) throws Exception {
+
+        Context context = new InitialContext();
+        LocateRegistry.createRegistry(8080);
+
+        ShowService showService = new ShowServiceImpl();
+
+        context.bind("rmi://Admin-PC:8080/showService", showService);
+
+        System.out.println("Server started...");
+    }
+}

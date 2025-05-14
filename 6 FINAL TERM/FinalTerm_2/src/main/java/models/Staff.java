@@ -32,10 +32,9 @@ public class Staff {
     @ElementCollection(fetch = FetchType.EAGER)
     @JoinTable(
             name = "phones",
-            joinColumns = @JoinColumn(name = "staff_id"),
-            uniqueConstraints = @UniqueConstraint(columnNames = {"staff_id", "number"})
+            joinColumns = @JoinColumn(name = "staff_id")
     )
-    @Column(name = "number")
+    @Column(name = "number", nullable = false)
     private Set<String> phoneNumbers;
 
     @Column(name = "refers")
