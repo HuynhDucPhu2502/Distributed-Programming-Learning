@@ -25,7 +25,7 @@ public class ShowDAO {
                     SELECT s 
                     FROM Show s 
                     JOIN s.movie m 
-                    WHERE m.director = :director
+                    WHERE m.director LIKE CONCAT("%", :director, "%")
                         AND s.showDateTime >= :currentDay
                         AND s.showDateTime < :nextDay
                     """;
