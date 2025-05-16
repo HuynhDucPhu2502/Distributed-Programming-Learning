@@ -16,8 +16,6 @@ import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class QuestionDAOTest {
@@ -34,23 +32,25 @@ public class QuestionDAOTest {
         questionDAO = null;
     }
 
-    // 3 phương thức
-    // => 6 hàm: 1 hàm test dữ liệu hợp lý, 1 hàm test dữ liệu không hợp lý
+    // 3 Phương thức
+    // 1 phương thức / 2 hàm:
+    // + Hàm test dữ liệu hợp lý
+    // + Hàm test dữ liệu không hợp lý
 
     @Test
     void listQuestionsByLevelAndCategoryTest() {
-        List<Question> questions = questionDAO.listQuestionsByLevelAndCategory("mo", Level.EASY);
+        List<Question> questions = questionDAO
+                .listQuestionsByLevelAndCategory("mo", Level.EASY);
         Question question = questions.get(0);
 
         assertEquals(4, questions.size());
         assertEquals("Q131", question.getId());
     }
 
-
     @Test
     void listQuestionsByLevelAndCategoryNullTest() {
-            List<Question> questions = questionDAO
-                    .listQuestionsByLevelAndCategory("Huynh Duc Phu", Level.EASY);
+        List<Question> questions = questionDAO
+                .listQuestionsByLevelAndCategory("Huynh Duc Phu", Level.EASY);
 
         assertEquals(0, questions.size());
     }
@@ -64,7 +64,7 @@ public class QuestionDAOTest {
     }
 
     @Test
-    void countQuestionsByLevelInNullQuizTest() {
+    void countQuestionsByLevelInQuizNullTest() {
         Map<Level, Long> map = questionDAO.countQuestionsByLevelInQuiz("Huynh Duc Phu");
 
         assertEquals(0, map.size());
@@ -73,13 +73,13 @@ public class QuestionDAOTest {
     @Test
     void addQuestionToCategoryTest() {
         Question question = new Question();
-        question.setId("QuestionForTest02");
+        question.setId("TestQuestion01");
         question.setQuestionText("Huynh Duc Phu");
 
         assertEquals(question, questionDAO.addQuestionToCategory(question, "C101"));
 
         EntityManager em = JPAUtils.getEntityManager();
-        Question question2 = em.find(Question.class, "QuestionForTest01");
+        Question question2 = em.find(Question.class, "TestQuestion01");
 
         assertNotNull(question2);
 
@@ -91,7 +91,7 @@ public class QuestionDAOTest {
     @Test
     void addQuestionToCategoryNullTest() {
         Question question = new Question();
-        question.setId("QuestionForTest03");
+        question.setId("TestQuestion01");
         question.setQuestionText("Huynh Duc Phu");
 
         assertNull(questionDAO.addQuestionToCategory(question, "Huynh Duc Phu"));
