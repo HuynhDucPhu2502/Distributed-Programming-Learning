@@ -15,15 +15,15 @@ public class Main {
         JPAUtils.getEntityManager();
 
         QuestionDAO questionDAO = new QuestionDAO();
-//        questionDAO.listQuestionsByLevelAndCategory("mo", Level.EASY)
-//                .forEach(System.out::println);
-//        questionDAO.countQuestionsByLevelInQuiz("QZ108")
+        questionDAO.listQuestionsByLevelAndCategory("mo", Level.EASY)
+                .forEach(System.out::println);
+        questionDAO.countQuestionsByLevelInQuiz("QZ108")
 //                .forEach((k, v) -> System.out.println(k + ": " + v));
 
-        Question question = new Question();
-        question.setId("Test");
-        question.setQuestionText("Huynh Duc Phu");
-        System.out.println(questionDAO.addQuestionToCategory(question, "C101"));
+//        Question question = new Question();
+//        question.setId("Test");
+//        question.setQuestionText("Huynh Duc Phu");
+//        System.out.println(questionDAO.addQuestionToCategory(question, "C101"));
 
 
 

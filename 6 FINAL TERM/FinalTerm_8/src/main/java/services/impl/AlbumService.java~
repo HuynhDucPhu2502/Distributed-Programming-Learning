@@ -1,0 +1,33 @@
+package services.impl;
+
+import daos.AlbumDAO;
+import models.Album;
+
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * Admin 5/16/2025
+ **/
+public class AlbumService extends UnicastRemoteObject {
+
+    private AlbumDAO albumDAO;
+
+    public AlbumService() throws RemoteException {
+        albumDAO = new AlbumDAO();
+    }
+
+    public boolean updatePriceOfAlbum(String id, double newPrice) throws RemoteException {
+        return albumDAO.updatePriceOfAlbum(id, newPrice);
+    }
+
+    public List<Album> listAlbumByGenre(String genreName, int releaseYear) throws RemoteException {
+        return albumDAO.listAlbumByGenre(genreName, releaseYear);
+    }
+
+    public Map<String, Long> getNumberOfAlbumsByGenre() throws RemoteException {
+        return albumDAO.getNumberOfAlbumsByGenre()
+    }
+}

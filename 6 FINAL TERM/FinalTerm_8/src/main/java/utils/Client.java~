@@ -1,0 +1,23 @@
+package utils;
+
+import services.AlbumService;
+
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+
+/**
+ * Admin 5/16/2025
+ **/
+public class Client {
+
+    public static void main(String[] args) throws Exception {
+        Registry registry = LocateRegistry.getRegistry("Admin-PC", 8080);
+
+        AlbumService albumService = (AlbumService) registry.lookup("albumService");
+
+        albumService.getNumberOfAlbumsByGenre();
+
+
+
+    }
+}

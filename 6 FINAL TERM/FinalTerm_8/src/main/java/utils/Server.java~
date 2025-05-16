@@ -1,0 +1,26 @@
+package utils;
+
+import services.AlbumService;
+import services.impl.AlbumServiceImpl;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import java.rmi.registry.LocateRegistry;
+
+/**
+ * Admin 5/16/2025
+ **/
+public class Server {
+
+    public static void main(String[] args) throws Exception {
+        Context context = new InitialContext();
+        LocateRegistry.createRegistry(8080);
+
+        AlbumService albumService = new AlbumServiceImpl();
+
+        context.bind("rmi://Admin-PC:8080/albumService", albumService);
+
+
+    }
+
+}
