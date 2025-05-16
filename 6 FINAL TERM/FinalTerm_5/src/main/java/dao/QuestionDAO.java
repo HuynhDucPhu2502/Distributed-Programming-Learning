@@ -73,6 +73,8 @@ public class QuestionDAO {
             Category category = em.find(Category.class, categoryId);
             if (category == null) return null;
 
+            System.out.println(category);
+
             Question question2 = em.find(Question.class, question.getId());
             if (question2 != null) return null;
 

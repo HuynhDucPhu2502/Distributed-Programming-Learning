@@ -17,8 +17,8 @@ public class Main {
         QuestionDAO questionDAO = new QuestionDAO();
 //        questionDAO.listQuestionsByLevelAndCategory("mo", Level.EASY)
 //                .forEach(System.out::println);
-//        questionDAO.countQuestionsByLevelInQuiz("QZ108")
-//                .forEach((k, v) -> System.out.println(k + ": " + v));
+        questionDAO.countQuestionsByLevelInQuiz("QZ108")
+                .forEach((k, v) -> System.out.println(k + ": " + v));
 
 //        Question question = new Question();
 //        question.setId("Test");
