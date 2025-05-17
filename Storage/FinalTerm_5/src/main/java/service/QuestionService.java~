@@ -1,7 +1,0 @@
-package service;
-
-/**
- *  Admin 5/10/2025
- *  
-**/public interface QuestionService {
-}
