@@ -1,7 +1,7 @@
 1. Tìm khóa học (`Course`) có số tín chỉ nằm giữa `minCredits` và `maxCredits`
 List<Course> findCourseByCreditsBetween(int minCredits, int maxCredits)
 
-2. Tìm khóa học (`Course`) thuộc khoa có tên chứa `deptName`
+2. Tìm TƯƠNG ĐỐI khóa học (`Course`) thuộc khoa có tên chứa `deptName`
 List<Course> findCourseByDepartmentNameContaining(String deptName)
 
 3. Tìm khóa học trực tuyến (`OnlineCourse`) có URL chứa `urlKeyword` và tín chỉ ≥ `minCredits`
